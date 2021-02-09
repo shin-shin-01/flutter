@@ -23,6 +23,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  # Stacked Architecture
+  stacked: ^1.7.7
+  # Get It
+  get_it: ^5.0.6
+  # Loading Screen
+  flutter_spinkit: "^4.1.2"
 
 
   # The following adds the Cupertino Icons font to your application.
