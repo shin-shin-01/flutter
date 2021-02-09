@@ -1,34 +1,41 @@
 import 'package:flutter/material.dart';
 
-import 'ui/home/home_view.dart';
+import 'package:my_app/services_locator.dart';
+import 'package:my_app/services/navigation.dart';
+import 'package:my_app/ui/sign_in/sign_in_view.dart';
+import 'package:my_app/ui/splash/splash_view.dart';
+import 'package:my_app/ui/home/home_view.dart';
 
 void main() {
+  setupServiceLocator();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  final _navigation = servicesLocator<NavigationService>();
+
   @override
   Widget build(BuildContext context) {
+    /// - #3f3f3f グレー
+    /// - #dfefff 薄い青
+    final appTheme = ThemeData(
+      primaryColor: Color(0xff3f3f3f),
+      backgroundColor: Color(0xffdfefff),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+    );
+
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-        // This makes the visual density adapt to the platform that you run
-        // the app on. For desktop platforms, the controls will be smaller and
-        // closer together (more dense) than on mobile platforms.
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      theme: appTheme,
+      navigatorKey: _navigation.navigatorKey,
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (context) => SplashView(),
+        '/sign_in': (context) => SignInView(),
+        '/home': (context) => MyHomePage(),
+        // '/settings': (context) => SettingsPage(),
+      },
     );
   }
 }
