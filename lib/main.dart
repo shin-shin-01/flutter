@@ -5,6 +5,7 @@ import 'package:my_app/services/navigation.dart';
 import 'package:my_app/ui/sign_in/sign_in_view.dart';
 import 'package:my_app/ui/splash/splash_view.dart';
 import 'package:my_app/ui/home/home_view.dart';
+import 'package:my_app/ui/todolist/todolist_view.dart';
 
 void main() {
   setupServiceLocator();
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/': (context) => SplashView(),
         '/sign_in': (context) => SignInView(),
-        '/home': (context) => MyHomePage(),
+        '/home': (context) => TodolistView(),
+        // '/home': (context) => MyHomePage(),
         // '/settings': (context) => SettingsPage(),
       },
     );
