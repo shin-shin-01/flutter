@@ -29,6 +29,8 @@ dependencies:
   get_it: ^5.0.6
   # Loading Screen
   flutter_spinkit: "^4.1.2"
+  # Google related
+  google_fonts: ^1.1.0
 
 
   # The following adds the Cupertino Icons font to your application.

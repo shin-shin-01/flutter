@@ -8,6 +8,6 @@ class SignInViewModel extends BaseViewModel {
   final _navigation = servicesLocator<NavigationService>();
 
   void submitSignInFake() {
-    _navigation.pushAndReplace(routeName: '/home');
+    _navigation.pushAndReplace(routeName: '/root');
   }
 }
