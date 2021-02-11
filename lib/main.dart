@@ -38,7 +38,6 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashView(),
         '/sign_in': (context) => SignInView(),
         '/root': (context) => RootView(),
-        // '/home': (context) => MyHomePage(),
         // '/settings': (context) => SettingsPage(),
       },
     );
