@@ -9,11 +9,25 @@ import 'package:my_app/shared/loading.dart';
 class TodolistView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /// うまい渡し方考える
+    final screenSize = MediaQuery.of(context).size;
     return ViewModelBuilder<TodolistViewModel>.reactive(
         viewModelBuilder: () => TodolistViewModel(),
         onModelReady: (model) => model.loadingInfoFake(),
-        builder: (context, model, child) =>
-            Scaffold(body: model.isBusy ? Loading() : _todoList(model)));
+        builder: (context, model, child) => Scaffold(
+            body: model.isBusy ? Loading() : _todoView(model, screenSize)));
+  }
+
+  /// todoList Main
+  /// - _todoList & _todoForm
+  Widget _todoView(TodolistViewModel model, Size screenSize) {
+    return Container(
+      alignment: Alignment.center,
+      width: screenSize.width - 96,
+      child: Column(
+        children: [Expanded(child: _todoList(model)), _todoForm(model)],
+      ),
+    );
   }
 
   /// _todoList
@@ -21,6 +35,8 @@ class TodolistView extends StatelessWidget {
   Widget _todoList(TodolistViewModel model) {
     final todos = model.todos;
     return ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.all(8),
         itemCount: todos.length,
         itemBuilder: (context, i) => _todoTile(todos[i]));
@@ -32,5 +48,21 @@ class TodolistView extends StatelessWidget {
         title: Text(todo.title),
       ),
     );
+  }
+
+  Widget _todoForm(TodolistViewModel model) {
+    return Form(
+        child: Column(children: [
+      TextFormField(
+        decoration: InputDecoration(
+          labelText: 'メールアドレス',
+          labelStyle: TextStyle(color: Color(0xffffff)),
+          border: OutlineInputBorder(),
+        ),
+        onChanged: model.setTodo,
+        // validator: () => Fake(),
+      ),
+      RaisedButton(child: Text('submit'), onPressed: model.submitTodo)
+    ]));
   }
 }
