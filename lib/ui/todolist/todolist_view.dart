@@ -52,17 +52,19 @@ class TodolistView extends StatelessWidget {
 
   Widget _todoForm(TodolistViewModel model) {
     return Form(
-        child: Column(children: [
-      TextFormField(
-        decoration: InputDecoration(
-          labelText: 'メールアドレス',
-          labelStyle: TextStyle(color: Color(0xffffff)),
-          border: OutlineInputBorder(),
+        child: Row(children: [
+      Flexible(
+        child: TextFormField(
+          decoration: InputDecoration(
+            labelText: 'メールアドレス',
+            labelStyle: TextStyle(color: Color(0xffffff)),
+            border: OutlineInputBorder(),
+          ),
+          onChanged: model.setTodo,
+          // validator: () => Fake(),
         ),
-        onChanged: model.setTodo,
-        // validator: () => Fake(),
       ),
-      RaisedButton(child: Text('submit'), onPressed: model.submitTodo)
+      IconButton(icon: Icon(Icons.save_alt), onPressed: model.submitTodo)
     ]));
   }
 }
