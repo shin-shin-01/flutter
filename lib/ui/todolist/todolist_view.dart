@@ -22,8 +22,8 @@ class TodolistView extends StatelessWidget {
   /// - _todoList & _todoForm
   Widget _todoView(TodolistViewModel model, Size screenSize) {
     return Container(
-      alignment: Alignment.center,
-      width: screenSize.width - 96,
+      height: screenSize.height,
+      width: screenSize.width,
       child: Column(
         children: [Expanded(child: _todoList(model)), _todoForm(model)],
       ),
@@ -51,20 +51,22 @@ class TodolistView extends StatelessWidget {
   }
 
   Widget _todoForm(TodolistViewModel model) {
-    return Form(
-        child: Row(children: [
-      Flexible(
-        child: TextFormField(
-          decoration: InputDecoration(
-            labelText: 'メールアドレス',
-            labelStyle: TextStyle(color: Color(0xffffff)),
-            border: OutlineInputBorder(),
+    return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+        child: Form(
+            child: Row(children: [
+          Flexible(
+            child: TextFormField(
+              decoration: InputDecoration(
+                labelText: 'メールアドレス',
+                labelStyle: TextStyle(color: Color(0xffffff)),
+                border: OutlineInputBorder(),
+              ),
+              onChanged: model.setTodo,
+              // validator: () => Fake(),
+            ),
           ),
-          onChanged: model.setTodo,
-          // validator: () => Fake(),
-        ),
-      ),
-      IconButton(icon: Icon(Icons.save_alt), onPressed: model.submitTodo)
-    ]));
+          IconButton(icon: Icon(Icons.save_alt), onPressed: model.submitTodo)
+        ])));
   }
 }
