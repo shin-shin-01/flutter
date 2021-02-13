@@ -13,6 +13,10 @@ class TodolistViewModel extends BaseViewModel {
   /// - Todoたち
   List<Todo> todos = [];
 
+  /// todo
+  /// - inputed by user
+  String _todo = "";
+
   Future<void> loadingInfoFake() async {
     setBusy(true);
 
@@ -21,5 +25,19 @@ class TodolistViewModel extends BaseViewModel {
 
     todos = getTodoFromApi;
     setBusy(false);
+  }
+
+  /// Save user's Input
+  void setTodo(String enteredTodo) {
+    _todo = enteredTodo;
+  }
+
+  /// Save Todo to TodoList
+  /// - Submitted Todo by user
+  void submitTodo() {
+    Todo newTodo =
+        new Todo(id: todos.length + 1, title: _todo, detail: "detail");
+    todos.add(newTodo);
+    notifyListeners();
   }
 }
