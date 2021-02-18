@@ -6,7 +6,6 @@ import 'package:my_app/services/navigation.dart';
 import 'package:my_app/ui/sign_in/sign_in_view.dart';
 import 'package:my_app/ui/splash/splash_view.dart';
 import 'package:my_app/ui/root/root_view.dart';
-import 'package:my_app/ui/home/home_view.dart';
 
 void main() {
   setupServiceLocator();
