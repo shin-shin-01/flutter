@@ -18,6 +18,8 @@ class RootView extends StatelessWidget {
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.amber[800],
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           items: model.bottomNavigationBarItems,
           currentIndex: model.selectedIndex,
           onTap: model.onItemTapped,
