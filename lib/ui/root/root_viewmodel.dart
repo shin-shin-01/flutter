@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:my_app/ui/home/home_view.dart';
-import 'package:my_app/ui/todolist/todolist_view.dart';
+import 'package:my_app/ui/category/category_view.dart';
 
 /// RootViewModel
 class RootViewModel extends BaseViewModel {
   int _selectedIndex = 0;
-  final List<Widget> _widgetOptions = <Widget>[MyHomePage(), TodolistView()];
+  final List<Widget> _widgetOptions = <Widget>[MyHomePage(), CategoryView()];
 
   /// selectedIndex
   /// - 選択中のタブの index
@@ -31,7 +31,7 @@ class RootViewModel extends BaseViewModel {
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.school),
-      label: 'TodoList',
+      label: 'Category',
     ),
   ];
 }
