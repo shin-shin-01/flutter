@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:my_app/ui/home/home_view.dart';
 import 'package:my_app/ui/category/category_view.dart';
 
 /// RootViewModel
 class RootViewModel extends BaseViewModel {
   int _selectedIndex = 0;
-  final List<Widget> _widgetOptions = <Widget>[MyHomePage(), CategoryView()];
+  final List<Widget> _widgetOptions = <Widget>[CategoryView(), CategoryView()];
 
   /// selectedIndex
   /// - 選択中のタブの index
@@ -26,12 +26,22 @@ class RootViewModel extends BaseViewModel {
 
   final bottomNavigationBarItems = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-      icon: Icon(Icons.home),
+      icon: Image.asset(
+        "images/cart.png",
+        // TODO: don't use integer
+        width: 50,
+        height: 50,
+      ),
       label: 'Home',
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.school),
-      label: 'Category',
-    ),
+      icon: Image.asset(
+        "images/friend.png",
+        // TODO: don't use integer
+        width: 50,
+        height: 50,
+      ),
+      label: 'Friend',
+    )
   ];
 }
