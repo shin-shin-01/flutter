@@ -22,7 +22,7 @@ class _SignInViewState extends State<SignInView> {
     return RaisedButton(
       child: const Text('Login'),
       color: Theme.of(context).primaryColor,
-      onPressed: model.lineLogin,
+      onPressed: model.login,
     );
   }
 }
