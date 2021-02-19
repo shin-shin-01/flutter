@@ -24,8 +24,14 @@ class CategoryViewModel extends BaseViewModel {
   Future<void> setTabs() async {
     category_tabs = categories
         .map<Tab>((c) => Tab(
-              text: c.name,
-            ))
+            text: c.name,
+            icon: Image.asset(
+              "images/${c.name}.png",
+              // TODO: don't use integer
+              width: 40,
+              height: 40,
+            ),
+            iconMargin: EdgeInsets.only(top: 5.0)))
         .toList() as List<Tab>;
   }
 }

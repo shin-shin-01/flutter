@@ -27,6 +27,9 @@ class CategoryView extends StatelessWidget {
               bottom: PreferredSize(
                   preferredSize: Size.fromHeight(20),
                   child: TabBar(
+                    labelStyle: TextStyle(
+                      fontSize: 0,
+                    ),
                     isScrollable: true,
                     tabs: category_tabs,
                   ))),
