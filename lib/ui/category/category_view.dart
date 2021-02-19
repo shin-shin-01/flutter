@@ -17,12 +17,23 @@ class CategoryView extends StatelessWidget {
   }
 
   Widget _categoryView(CategoryViewModel model, Size screenSize) {
-    return Container(
-      height: screenSize.height,
-      width: screenSize.width,
-      child: Column(
-        children: [Expanded(child: _categoryList(model))],
-      ),
+    final categories = model.categories;
+    return DefaultTabController(
+      length: categories.length,
+      child: Scaffold(
+          appBar: AppBar(
+              backgroundColor: Colors.white,
+              bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(20),
+                  child: TabBar(
+                    isScrollable: true,
+                    tabs: [
+                      Tab(child: Text('sample')),
+                      Tab(child: Text('sample2')),
+                    ],
+                  ))),
+          body: TabBarView(
+              children: [_categoryList(model), _categoryList(model)])),
     );
   }
 
