@@ -18,8 +18,9 @@ class CategoryView extends StatelessWidget {
 
   Widget _categoryView(CategoryViewModel model, Size screenSize) {
     final categories = model.categories;
+    final category_tabs = model.category_tabs;
     return DefaultTabController(
-      length: categories.length,
+      length: category_tabs.length,
       child: Scaffold(
           appBar: AppBar(
               backgroundColor: Colors.white,
@@ -27,10 +28,7 @@ class CategoryView extends StatelessWidget {
                   preferredSize: Size.fromHeight(20),
                   child: TabBar(
                     isScrollable: true,
-                    tabs: [
-                      Tab(child: Text('sample')),
-                      Tab(child: Text('sample2')),
-                    ],
+                    tabs: category_tabs,
                   ))),
           body: TabBarView(
               children: [_categoryList(model), _categoryList(model)])),
