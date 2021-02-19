@@ -17,16 +17,30 @@ class CategoryView extends StatelessWidget {
   }
 
   Widget _categoryView(CategoryViewModel model, Size screenSize) {
-    return Container(
-      height: screenSize.height,
-      width: screenSize.width,
-      child: Column(
-        children: [Expanded(child: _categoryList(model))],
-      ),
+    final categories = model.categories;
+    final category_tabs = model.category_tabs;
+    return DefaultTabController(
+      length: category_tabs.length,
+      child: Scaffold(
+          appBar: AppBar(
+              backgroundColor: Colors.white,
+              bottom: PreferredSize(
+                  preferredSize: Size.fromHeight(20),
+                  child: TabBar(
+                    labelStyle: TextStyle(
+                      fontSize: 0,
+                    ),
+                    isScrollable: true,
+                    tabs: category_tabs,
+                  ))),
+          body: TabBarView(
+              children: category_tabs
+                  .map((tab) => _categoryList(model, tab.text))
+                  .toList())),
     );
   }
 
-  Widget _categoryList(CategoryViewModel model) {
+  Widget _categoryList(CategoryViewModel model, String name) {
     final categories = model.categories;
     return ListView.builder(
         shrinkWrap: true,

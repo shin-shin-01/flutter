@@ -13,7 +13,9 @@ class RootView extends StatelessWidget {
     return ViewModelBuilder<RootViewModel>.reactive(
       viewModelBuilder: () => RootViewModel(),
       builder: (context, model, child) => Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor.withOpacity(0.0),
+        ),
         drawer: SideMenu(),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
