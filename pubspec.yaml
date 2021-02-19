@@ -33,6 +33,8 @@ dependencies:
   google_fonts: ^1.1.0
   # HTTP
   http: ^0.12.2
+  # LINE login
+  flutter_line_sdk: ^1.3.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
