@@ -24,7 +24,7 @@ class CategoryViewModel extends BaseViewModel {
   Future<void> setTabs() async {
     category_tabs = categories
         .map<Tab>((c) => Tab(
-              child: Text(c.name),
+              text: c.name,
             ))
         .toList() as List<Tab>;
   }

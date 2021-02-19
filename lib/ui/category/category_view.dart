@@ -31,11 +31,13 @@ class CategoryView extends StatelessWidget {
                     tabs: category_tabs,
                   ))),
           body: TabBarView(
-              children: [_categoryList(model), _categoryList(model)])),
+              children: category_tabs
+                  .map((tab) => _categoryList(model, tab.text))
+                  .toList())),
     );
   }
 
-  Widget _categoryList(CategoryViewModel model) {
+  Widget _categoryList(CategoryViewModel model, String name) {
     final categories = model.categories;
     return ListView.builder(
         shrinkWrap: true,
