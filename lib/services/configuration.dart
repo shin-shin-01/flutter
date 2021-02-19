@@ -6,4 +6,7 @@ class ConfigurationService {
 
   /// apiVersion
   int get apiVersion => 1;
+  String get authorizationHeaderName {
+    return 'LINEAuthorization';
+  }
 }
