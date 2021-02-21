@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:my_app/model/todo.dart';
 import 'package:my_app/model/category.dart';
+import 'package:my_app/model/user.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/authentication.dart';
 import 'package:my_app/services/configuration.dart';
@@ -41,6 +42,35 @@ class APIService {
   }
 
   /// データ整形
+  User parseUsers(String responseBody) {
+    final data = json.decode(responseBody)['user'];
+    final user = data.fromJson();
+
+    return user;
+  }
+
+  /// createUsers
+  Future<User> createUser() async {
+    final endpoint = '/users';
+    final url = requestUrl(endpoint);
+    final headers = await authorizedHeaderWithJson();
+
+    final name = await _auth.name;
+    final uid = await _auth.uid;
+
+    final payload = jsonEncode({
+      'user': {'name': name, 'uid': uid}
+    });
+
+    final response = await http.post(url, headers: headers, body: payload);
+
+    /// TODO: error Handling
+    if (response.statusCode != 201) return null;
+
+    return parseUsers(response.body);
+  }
+
+  /// データ整形
   /// parseCategories
   List<Category> parseCategories(String responseBody) {
     final data = json.decode(responseBody)['categories'];
@@ -57,9 +87,7 @@ class APIService {
     final endpoint = '/categories';
     final url = requestUrl(endpoint);
     final headers = await authorizedHeader();
-    print(headers);
 
-    // final response = await http.get(url, headers: headers);
     final response = await http.get(url, headers: headers);
 
     if (response.statusCode != 200) return null;
