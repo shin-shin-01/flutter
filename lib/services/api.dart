@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:my_app/model/todo.dart';
 import 'package:my_app/model/category.dart';
 import 'package:my_app/model/user.dart';
+import 'package:my_app/model/wish.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/authentication.dart';
 import 'package:my_app/services/configuration.dart';
@@ -73,7 +74,7 @@ class APIService {
   /// データ整形
   /// parseCategories
   List<Category> parseCategories(String responseBody) {
-    final data = json.decode(responseBody)['categories'];
+    final data = json.decode(responseBody)['data'];
     final categories = data
         .map<Category>(
             (json) => Category.fromJson(json as Map<String, dynamic>))
@@ -93,6 +94,31 @@ class APIService {
     if (response.statusCode != 200) return null;
 
     return parseCategories(response.body);
+  }
+
+  /// データ整形
+  List<Wish> parseWishes(String responseBody) {
+    final data = json.decode(responseBody)['data'];
+    final wishes = data
+        .map<Wish>((json) => Wish.fromJson(json as Map<String, dynamic>))
+        .toList() as List<Wish>;
+    return wishes;
+  }
+
+  /// getWishes
+  Future<List<Wish>> getWishes(int category_id) async {
+    final uid = await _auth.uid;
+
+    final endpoint = '/users/$uid/wishes?category_id=$category_id';
+    final url = requestUrl(endpoint);
+    final headers = await authorizedHeader();
+
+    final response = await http.get(url, headers: headers);
+    print(response.body);
+
+    if (response.statusCode != 200) return null;
+
+    return parseWishes(response.body);
   }
 
   /// getTodos Fakefunction

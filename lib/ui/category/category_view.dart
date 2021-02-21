@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:my_app/model/category.dart';
+import 'package:my_app/model/wish.dart';
 import 'package:my_app/ui/category/category_viewmodel.dart';
 import 'package:my_app/shared/loading.dart';
 
@@ -17,7 +18,6 @@ class CategoryView extends StatelessWidget {
   }
 
   Widget _categoryView(CategoryViewModel model, Size screenSize) {
-    final categories = model.categories;
     final category_tabs = model.category_tabs;
     return DefaultTabController(
       length: category_tabs.length,
@@ -35,25 +35,27 @@ class CategoryView extends StatelessWidget {
                   ))),
           body: TabBarView(
               children: category_tabs
-                  .map((tab) => _categoryList(model, tab.text))
+                  .map((tab) => _wishList(model, tab.text))
                   .toList())),
     );
   }
 
-  Widget _categoryList(CategoryViewModel model, String name) {
-    final categories = model.categories;
+  Widget _wishList(CategoryViewModel model, String category_name) {
+    final wishes = model.wishes[category_name];
+    print(wishes);
+
     return ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.all(8),
-        itemCount: categories.length,
-        itemBuilder: (context, i) => _categoryTile(categories[i]));
+        itemCount: wishes.length,
+        itemBuilder: (context, i) => _wishTile(wishes[i]));
   }
 
-  Widget _categoryTile(Category category) {
+  Widget _wishTile(Wish wish) {
     return Card(
       child: ListTile(
-        title: Text(category.name),
+        title: Text(wish.name),
       ),
     );
   }
