@@ -37,7 +37,7 @@ class CategoryViewModel extends BaseViewModel {
               width: 40,
               height: 40,
             ),
-            iconMargin: EdgeInsets.only(top: 5.0)))
+            iconMargin: EdgeInsets.only(top: 4.0)))
         .toList() as List<Tab>;
   }
 }
