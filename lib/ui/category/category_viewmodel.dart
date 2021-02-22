@@ -21,14 +21,8 @@ class CategoryViewModel extends BaseViewModel {
     categories = getCategoriesFromApi;
     await setTabs();
 
-    /// TODO: リファクタリング 思い処理してる
-    for (Category category in categories) {
-      final category_id = category.id;
-      print("wish #GET request ${category_id}");
-      final getWishesFromApi = await _api.getWishes(category_id);
-      wishes[category.name] = getWishesFromApi;
-    }
-    print(wishes);
+    final getWishesFromApi = await _api.getWishes();
+    wishes = getWishesFromApi;
 
     setBusy(false);
   }

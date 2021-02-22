@@ -112,19 +112,21 @@ class APIService {
   }
 
   /// データ整形
-  List<Wish> parseWishes(String responseBody) {
+  Map<String, List<Wish>> parseWishes(String responseBody) {
     final data = json.decode(responseBody)['data'];
-    final wishes = data
-        .map<Wish>((json) => Wish.fromJson(json as Map<String, dynamic>))
-        .toList() as List<Wish>;
+    final wishes = data.forEach((key, value) {
+      value
+          .map<Wish>((json) => Wish.fromJson(json as Map<String, dynamic>))
+          .toList() as List<Wish>;
+    });
     return wishes;
   }
 
   /// getWishes
-  Future<List<Wish>> getWishes(int category_id) async {
+  Future<Map<String, List<Wish>>> getWishes() async {
     final uid = await _auth.uid;
 
-    final endpoint = '/users/$uid/wishes?category_id=$category_id';
+    final endpoint = '/users/$uid/wishes';
     final url = requestUrl(endpoint);
     final headers = await authorizedHeader();
 
