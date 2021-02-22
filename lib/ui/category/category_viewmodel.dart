@@ -38,7 +38,7 @@ class CategoryViewModel extends BaseViewModel {
         .map<Tab>((c) => Tab(
             text: c.name,
             icon: Image.asset(
-              "images/${c.name}.png",
+              "images/categories/${c.name}.png",
               // TODO: don't use integer
               width: 40,
               height: 40,

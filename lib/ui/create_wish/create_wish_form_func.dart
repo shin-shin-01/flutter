@@ -15,7 +15,7 @@ class CreateWishFormBloc extends FormBloc<String, String> {
     name: 'category',
 
     /// get Category
-    items: ['1: 場所', '2: 服'],
+    items: ['1: place', '2: fashion', '3: food', '4: machine', '5: music'],
   );
 
   CreateWishFormBloc() {
