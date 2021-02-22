@@ -71,6 +71,21 @@ class APIService {
     return parseUsers(response.body);
   }
 
+  /// createWishes
+  Future<void> createWish(String name, int star, int category_id) async {
+    final uid = await _auth.uid;
+
+    final endpoint = '/users/$uid/wishes';
+    final url = requestUrl(endpoint);
+    final headers = await authorizedHeaderWithJson();
+
+    final payload = jsonEncode({
+      'wish': {'name': name, 'star': star, 'category_id': category_id}
+    });
+
+    final response = await http.post(url, headers: headers, body: payload);
+  }
+
   /// データ整形
   /// parseCategories
   List<Category> parseCategories(String responseBody) {
