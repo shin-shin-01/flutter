@@ -1,8 +1,8 @@
 class ConfigurationService {
   /// apiRootUrl
   String get apiRootUrl {
-    // return 'https://wishapp-api.herokuapp.com';
-    return 'http://localhost:3000';
+    return 'https://wishapp-api.herokuapp.com';
+    // return 'http://localhost:3000';
   }
 
   /// apiVersion
