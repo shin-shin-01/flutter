@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:my_app/ui/category/category_view.dart';
+import 'package:my_app/ui/create_wish/create_wish_view.dart';
 
 /// RootViewModel
 class RootViewModel extends BaseViewModel {
   int _selectedIndex = 0;
-  final List<Widget> _widgetOptions = <Widget>[CategoryView(), CategoryView()];
+  final List<Widget> _widgetOptions = <Widget>[
+    CategoryView(),
+    CategoryView(),
+    CreateWishView()
+  ];
 
   /// selectedIndex
   /// - 選択中のタブの index
@@ -24,11 +28,27 @@ class RootViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  /// TODO: imple this
+  // buttom をTapしたとき動作
+  // void onPlusButtomTapped() {
+  //   print('ButtomTaped');
+  //   _selectedIndex = _widgetOptions.length - 1;
+  //   print(_selectedIndex);
+  //   notifyListeners();
+  // }
+
   final bottomNavigationBarItems = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       icon: Image.asset(
+        "images/friend.png",
+        width: 50,
+        height: 50,
+      ),
+      label: 'Friend',
+    ),
+    BottomNavigationBarItem(
+      icon: Image.asset(
         "images/cart.png",
-        // TODO: don't use integer
         width: 50,
         height: 50,
       ),
@@ -36,8 +56,7 @@ class RootViewModel extends BaseViewModel {
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
-        "images/friend.png",
-        // TODO: don't use integer
+        "images/pencil.png",
         width: 50,
         height: 50,
       ),

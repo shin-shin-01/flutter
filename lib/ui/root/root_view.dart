@@ -14,6 +14,7 @@ class RootView extends StatelessWidget {
       viewModelBuilder: () => RootViewModel(),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
+          flexibleSpace: Image.asset('images/header.png', fit: BoxFit.cover),
           backgroundColor: Theme.of(context).primaryColor.withOpacity(0.0),
         ),
         drawer: SideMenu(),
@@ -28,6 +29,17 @@ class RootView extends StatelessWidget {
         ),
         body: model.selectedWidget,
         backgroundColor: Theme.of(context).backgroundColor,
+        // TODO: imple this
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () => model.onPlusButtomTapped(),
+        //   backgroundColor: Colors.white,
+        //   child: Image.asset(
+        //     "images/pencil.png",
+        //     // TODO: don't use integer
+        //     width: 40,
+        //     height: 40,
+        //   ),
+        // ),
       ),
     );
   }

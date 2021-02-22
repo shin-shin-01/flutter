@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import 'package:my_app/model/category.dart';
 import 'package:my_app/model/wish.dart';
 import 'package:my_app/ui/category/category_viewmodel.dart';
 import 'package:my_app/shared/loading.dart';
@@ -20,8 +19,8 @@ class CategoryView extends StatelessWidget {
   Widget _categoryView(CategoryViewModel model, Size screenSize) {
     final category_tabs = model.category_tabs;
     return DefaultTabController(
-      length: category_tabs.length,
-      child: Scaffold(
+        length: category_tabs.length,
+        child: Scaffold(
           appBar: AppBar(
               backgroundColor: Colors.white,
               bottom: PreferredSize(
@@ -36,13 +35,12 @@ class CategoryView extends StatelessWidget {
           body: TabBarView(
               children: category_tabs
                   .map((tab) => _wishList(model, tab.text))
-                  .toList())),
-    );
+                  .toList()),
+        ));
   }
 
   Widget _wishList(CategoryViewModel model, String category_name) {
     final wishes = model.wishes[category_name];
-    print(wishes);
 
     return ListView.builder(
         shrinkWrap: true,
