@@ -11,7 +11,6 @@ class StartupService {
   /// handleStartUpLogic
   /// - navigate to respective route based on different coniditions
   Future handleStartUpLogicFake() async {
-    await new Future.delayed(new Duration(seconds: 3));
     _navigation.pushNamedAndRemoveUntil(routeName: '/sign_in');
   }
 }

@@ -90,7 +90,7 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formBloc = BlocProvider.of<CreateWishFormBloc>(context);
-    return FloatingActionButton.extended(
+    return OutlineButton.icon(
       icon: Image.asset(
         "images/upload.png",
         width: 30,
@@ -100,7 +100,7 @@ class SubmitButton extends StatelessWidget {
         'SUBMIT',
         style: TextStyle(color: Theme.of(context).primaryColor),
       ),
-      backgroundColor: Colors.white,
+      color: Colors.blue.withOpacity(0.2),
       onPressed: formBloc.submit,
     );
   }
