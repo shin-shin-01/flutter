@@ -3,12 +3,13 @@ import 'package:stacked/stacked.dart';
 
 import 'package:my_app/ui/category/category_view.dart';
 import 'package:my_app/ui/create_wish/create_wish_view.dart';
+import 'package:my_app/shared/waitingfor_screen.dart';
 
 /// RootViewModel
 class RootViewModel extends BaseViewModel {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
   final List<Widget> _widgetOptions = <Widget>[
-    CategoryView(),
+    WaitingforScreen(),
     CategoryView(),
     CreateWishView()
   ];
