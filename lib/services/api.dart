@@ -114,8 +114,11 @@ class APIService {
   /// データ整形
   Map<String, List<Wish>> parseWishes(String responseBody) {
     final data = json.decode(responseBody)['data'];
-    final wishes = data.forEach((key, value) {
-      value
+
+    /// TODO: リファクタリング
+    final Map<String, List<Wish>> wishes = new Map();
+    data.forEach((key, value) {
+      wishes[key] = value
           .map<Wish>((json) => Wish.fromJson(json as Map<String, dynamic>))
           .toList() as List<Wish>;
     });
