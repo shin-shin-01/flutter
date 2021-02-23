@@ -134,7 +134,6 @@ class APIService {
     final headers = await authorizedHeader();
 
     final response = await http.get(url, headers: headers);
-    print(response.body);
 
     if (response.statusCode != 200) return null;
 

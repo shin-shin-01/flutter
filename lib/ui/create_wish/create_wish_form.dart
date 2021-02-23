@@ -16,6 +16,7 @@ class FormView extends StatelessWidget {
                 NameField(),
                 CategoryField(),
                 StarField(),
+                SizedBox(height: 5),
                 SubmitButton(),
               ],
             )));
@@ -89,15 +90,19 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formBloc = BlocProvider.of<CreateWishFormBloc>(context);
-    return RaisedButton.icon(
-        onPressed: formBloc.submit,
-        label: Text('SUBMIT'),
-        icon: Image.asset(
-          "images/upload.png",
-          width: 30,
-          height: 30,
-        ),
-        color: Colors.white);
+    return OutlineButton.icon(
+      icon: Image.asset(
+        "images/upload.png",
+        width: 30,
+        height: 30,
+      ),
+      label: Text(
+        'SUBMIT',
+        style: TextStyle(color: Theme.of(context).primaryColor),
+      ),
+      color: Colors.blue.withOpacity(0.2),
+      onPressed: formBloc.submit,
+    );
   }
 }
 

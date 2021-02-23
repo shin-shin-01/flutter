@@ -19,10 +19,11 @@ class _SignInViewState extends State<SignInView> {
   }
 
   Widget _loginButton(SignInViewModel model) {
-    return RaisedButton(
-      child: const Text('Login'),
-      color: Theme.of(context).primaryColor,
-      onPressed: model.login,
+    return GestureDetector(
+      child: Image.asset(
+        "images/login/btn_login_base.png",
+      ),
+      onTap: model.login,
     );
   }
 }

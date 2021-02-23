@@ -14,9 +14,9 @@ class RootView extends StatelessWidget {
       viewModelBuilder: () => RootViewModel(),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(
-          flexibleSpace: Image.asset('images/header.png', fit: BoxFit.cover),
-          backgroundColor: Theme.of(context).primaryColor.withOpacity(0.0),
-        ),
+            flexibleSpace: Image.asset('images/header.png', fit: BoxFit.cover),
+            backgroundColor: Theme.of(context).primaryColor.withOpacity(0.0),
+            elevation: 0.0),
         drawer: SideMenu(),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

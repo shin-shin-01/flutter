@@ -26,9 +26,10 @@ class CategoryView extends StatelessWidget {
               bottom: PreferredSize(
                   preferredSize: Size.fromHeight(20),
                   child: TabBar(
-                    labelStyle: TextStyle(
-                      fontSize: 0,
-                    ),
+                    indicatorColor: Colors.green,
+                    labelColor: Colors.green,
+                    unselectedLabelColor: Colors.grey,
+                    labelStyle: TextStyle(fontSize: 12),
                     isScrollable: true,
                     tabs: category_tabs,
                   ))),
@@ -51,8 +52,19 @@ class CategoryView extends StatelessWidget {
   }
 
   Widget _wishTile(Wish wish) {
+    /// TODO: 適当に決めたので修正
+    final double topDownPaddingSize = 20.0 - wish.star * 2.0;
+    final double leftPaddingSize = 1.1 * (5.0 - wish.star);
+
     return Card(
       child: ListTile(
+        leading: Padding(
+          padding: EdgeInsets.only(
+              left: leftPaddingSize,
+              top: topDownPaddingSize,
+              bottom: topDownPaddingSize),
+          child: Image.asset("images/heart.png"),
+        ),
         title: Text(wish.name),
       ),
     );

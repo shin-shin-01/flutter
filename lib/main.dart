@@ -17,9 +17,7 @@ void main() async {
   setupServiceLocator();
   // LINE LOGIN
   WidgetsFlutterBinding.ensureInitialized();
-  LineSDK.instance.setup(env["LINE_CHANNEL_ID"]).then((_) {
-    print("LineSDK Prepared");
-  });
+  LineSDK.instance.setup(env["LINE_CHANNEL_ID"]);
   runApp(MyApp());
 }
 
@@ -39,7 +37,8 @@ class MyApp extends StatelessWidget {
     );
 
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Wish',
+      debugShowCheckedModeBanner: false,
       theme: appTheme,
       navigatorKey: _navigation.navigatorKey,
       initialRoute: '/',

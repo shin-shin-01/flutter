@@ -3,9 +3,6 @@ import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/navigation.dart';
-import 'package:my_app/services/api.dart';
-
-import 'package:my_app/model/user.dart';
 
 class AuthService {
   final _navigation = servicesLocator<NavigationService>();
