@@ -41,7 +41,7 @@ class RootViewModel extends BaseViewModel {
   final bottomNavigationBarItems = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       icon: Image.asset(
-        "images/friend.png",
+        "images/tabmenu/friend.png",
         width: 50,
         height: 50,
       ),
@@ -49,7 +49,7 @@ class RootViewModel extends BaseViewModel {
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
-        "images/cart.png",
+        "images/tabmenu/cart.png",
         width: 50,
         height: 50,
       ),
@@ -57,7 +57,7 @@ class RootViewModel extends BaseViewModel {
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
-        "images/pencil.png",
+        "images/tabmenu/pencil.png",
         width: 50,
         height: 50,
       ),

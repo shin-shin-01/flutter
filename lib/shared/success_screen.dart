@@ -30,7 +30,7 @@ class SuccessScreen extends StatelessWidget {
           SizedBox(height: 20),
           FloatingActionButton.extended(
             icon: Image.asset(
-              "images/cart.png",
+              "images/tabmenu/cart.png",
               width: 30,
               height: 30,
             ),

@@ -32,7 +32,7 @@ class RootView extends StatelessWidget {
         //   onPressed: () => model.onPlusButtomTapped(),
         //   backgroundColor: Colors.white,
         //   child: Image.asset(
-        //     "images/pencil.png",
+        //     "images/tabmenu/pencil.png",
         //     // TODO: don't use integer
         //     width: 40,
         //     height: 40,

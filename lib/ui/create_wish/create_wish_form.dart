@@ -53,7 +53,7 @@ class NameField extends StatelessWidget {
       textFieldBloc: formBloc.name,
       decoration: InputDecoration(
           labelText: 'Name',
-          prefixIcon: PrefixIcon(iconUrl: "images/alphabet.png")),
+          prefixIcon: PrefixIcon(iconUrl: "images/form/alphabet.png")),
     );
   }
 }
@@ -66,7 +66,7 @@ class CategoryField extends StatelessWidget {
       selectFieldBloc: formBloc.category,
       decoration: InputDecoration(
           labelText: 'Category',
-          prefixIcon: PrefixIcon(iconUrl: "images/search.png")),
+          prefixIcon: PrefixIcon(iconUrl: "images/form/search.png")),
       itemBuilder: (context, value) => value,
     );
   }
@@ -80,7 +80,7 @@ class StarField extends StatelessWidget {
       selectFieldBloc: formBloc.star,
       decoration: InputDecoration(
           labelText: 'Star',
-          prefixIcon: PrefixIcon(iconUrl: "images/love.png")),
+          prefixIcon: PrefixIcon(iconUrl: "images/form/love.png")),
       itemBuilder: (context, value) => value,
     );
   }
@@ -92,7 +92,7 @@ class SubmitButton extends StatelessWidget {
     final formBloc = BlocProvider.of<CreateWishFormBloc>(context);
     return OutlineButton.icon(
       icon: Image.asset(
-        "images/upload.png",
+        "images/form/upload.png",
         width: 30,
         height: 30,
       ),
