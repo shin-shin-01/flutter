@@ -86,6 +86,21 @@ class APIService {
     final response = await http.post(url, headers: headers, body: payload);
   }
 
+  /// updateWish
+  Future<void> updateWish(int id, bool deleted) async {
+    final uid = await _auth.uid;
+
+    final endpoint = '/users/$uid/wishes/$id';
+    final url = requestUrl(endpoint);
+    final headers = await authorizedHeaderWithJson();
+
+    final payload = jsonEncode({
+      'wish': {'deleted': deleted}
+    });
+
+    final response = await http.put(url, headers: headers, body: payload);
+  }
+
   /// データ整形
   /// parseCategories
   List<Category> parseCategories(String responseBody) {

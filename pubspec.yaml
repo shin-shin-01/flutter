@@ -42,6 +42,8 @@ dependencies:
   # form progress bar
   liquid_progress_indicator: ^0.3.2
   rxdart: ^0.24.0
+  # for dialog without context
+  get: ^3.25.4
        
 
 
