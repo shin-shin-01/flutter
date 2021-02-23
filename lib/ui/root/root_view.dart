@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:my_app/shared/sidemenu.dart';
+import 'package:my_app/shared/appbar.dart';
 import 'package:my_app/ui/root/root_viewmodel.dart';
 
 /// RootView
@@ -13,10 +14,7 @@ class RootView extends StatelessWidget {
     return ViewModelBuilder<RootViewModel>.reactive(
       viewModelBuilder: () => RootViewModel(),
       builder: (context, model, child) => Scaffold(
-        appBar: AppBar(
-            flexibleSpace: Image.asset('images/header.png', fit: BoxFit.cover),
-            backgroundColor: Theme.of(context).primaryColor.withOpacity(0.0),
-            elevation: 0.0),
+        appBar: RootAppBar(),
         drawer: SideMenu(),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,

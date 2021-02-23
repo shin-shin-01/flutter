@@ -13,6 +13,8 @@ class AuthService {
   String get name => display_name;
   String user_id = "";
   String get uid => user_id;
+  String pictur_url = "";
+  String get picturUrl => pictur_url;
 
   Future lineLogin() async {
     try {
@@ -23,6 +25,7 @@ class AuthService {
       access_token = result.accessToken.value;
       display_name = result.userProfile.displayName;
       user_id = result.userProfile.userId;
+      pictur_url = result.userProfile.pictureUrl;
 
       _navigation.pushAndReplace(routeName: '/root');
     } on PlatformException catch (e) {
