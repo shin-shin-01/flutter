@@ -17,8 +17,10 @@ class CategoryViewModel extends BaseViewModel {
   Future<void> initialize() async {
     setBusy(true);
 
-    final getCategoriesFromApi = await _api.getCategories();
-    categories = getCategoriesFromApi;
+    if (categories.length == 0) {
+      final getCategoriesFromApi = await _api.getCategories();
+      categories = getCategoriesFromApi;
+    }
     await setTabs();
 
     final getWishesFromApi = await _api.getWishes();
