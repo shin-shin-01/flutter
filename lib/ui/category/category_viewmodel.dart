@@ -5,9 +5,11 @@ import 'package:my_app/model/category.dart';
 import 'package:my_app/model/wish.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/api.dart';
+import 'package:my_app/services/navigation.dart';
 
 class CategoryViewModel extends BaseViewModel {
   final _api = servicesLocator<APIService>();
+  final _navigator = servicesLocator<NavigationService>();
 
   /// categories
   List<Category> categories = [];
@@ -41,5 +43,11 @@ class CategoryViewModel extends BaseViewModel {
             ),
             iconMargin: EdgeInsets.only(top: 4.0)))
         .toList() as List<Tab>;
+  }
+
+  Future<void> deleteWishes(Wish wish) async {
+    _navigator.pop();
+    await _api.updateWish(wish.id, true);
+    await initialize();
   }
 }
