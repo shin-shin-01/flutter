@@ -59,7 +59,11 @@ class NameField extends StatelessWidget {
           filled: true,
           fillColor: _config.appColor["createWishFormBackground"],
           labelStyle: TextStyle(color: _config.appColor["createWishFont"]),
-          focusColor: _config.appColor["createFormFocusColor"],
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: _config.appColor["createFormBorderColor"],
+            ),
+          ),
           prefixIcon: PrefixIcon(iconUrl: "images/form/alphabet.png")),
     );
   }
@@ -77,7 +81,11 @@ class CategoryField extends StatelessWidget {
           filled: true,
           fillColor: _config.appColor["createWishFormBackground"],
           labelStyle: TextStyle(color: _config.appColor["createWishFont"]),
-          focusColor: _config.appColor["createFormFocusColor"],
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: _config.appColor["createFormBorderColor"],
+            ),
+          ),
           prefixIcon: PrefixIcon(iconUrl: "images/form/search.png")),
       itemBuilder: (context, value) => value,
     );
@@ -96,7 +104,11 @@ class StarField extends StatelessWidget {
           filled: true,
           fillColor: _config.appColor["createWishFormBackground"],
           labelStyle: TextStyle(color: _config.appColor["createWishFont"]),
-          focusColor: _config.appColor["createFormFocusColor"],
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: _config.appColor["createFormBorderColor"],
+            ),
+          ),
           prefixIcon: PrefixIcon(iconUrl: "images/form/love.png")),
       itemBuilder: (context, value) => value,
     );

@@ -31,7 +31,7 @@ class ConfigurationService {
       "formColor": 0xffEEE8E1,
       "buttonBackground": 0xffEEE8E1,
 
-      "formFocusColor": 0xffffffff,
+      "formBorderColor": 0xff9E837B,
 
       /// 薄い灰色
       "backgroundColor": 0xffF2EEEC,
@@ -97,7 +97,7 @@ class ConfigurationService {
         Color(colors[colorTheme]["naviBackgroundColor"]),
     "createWishBodyBackground": Color(colors[colorTheme]["backgroundColor"]),
     "createWishFormBackground": Color(colors[colorTheme]["formColor"]),
-    "createFormFocusColor": Color(colors[colorTheme]["formFocusColor"]),
+    "createFormBorderColor": Color(colors[colorTheme]["formBorderColor"]),
     "createWishFont": Color(colors[colorTheme]["font"]),
   };
 
