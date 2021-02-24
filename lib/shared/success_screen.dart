@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/navigation.dart';
+import 'package:my_app/services/configuration.dart';
 
 /// TODO: リファクタリング
 class SuccessScreen extends StatelessWidget {
   final _navigation = servicesLocator<NavigationService>();
+  final _config = servicesLocator<ConfigurationService>();
   SuccessScreen({Key key}) : super(key: key);
 
   @override
@@ -36,9 +38,9 @@ class SuccessScreen extends StatelessWidget {
             ),
             label: Text(
               'Check!',
-              style: TextStyle(color: Theme.of(context).primaryColor),
+              style: TextStyle(color: _config.appColor["text"]),
             ),
-            backgroundColor: Colors.white,
+            backgroundColor: _config.appColor["successBackground"],
             onPressed: () => _navigation.pushAndReplace(routeName: '/root'),
           ),
         ],

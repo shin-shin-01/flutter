@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:my_app/shared/progress.dart';
 import 'package:my_app/ui/create_wish/create_wish_form_func.dart';
+import 'package:my_app/services_locator.dart';
+import 'package:my_app/services/configuration.dart';
 
 /// Form画面を作成
 class FormView extends StatelessWidget {
@@ -87,6 +89,7 @@ class StarField extends StatelessWidget {
 }
 
 class SubmitButton extends StatelessWidget {
+  final _config = servicesLocator<ConfigurationService>();
   @override
   Widget build(BuildContext context) {
     final formBloc = BlocProvider.of<CreateWishFormBloc>(context);
@@ -98,9 +101,9 @@ class SubmitButton extends StatelessWidget {
       ),
       label: Text(
         'SUBMIT',
-        style: TextStyle(color: Theme.of(context).primaryColor),
+        style: TextStyle(color: _config.appColor["text"]),
       ),
-      color: Colors.blue.withOpacity(0.2),
+      color: _config.appColor["createWishSubmitBackground"],
       onPressed: formBloc.submit,
     );
   }

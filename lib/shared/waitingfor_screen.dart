@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/services_locator.dart';
+import 'package:my_app/services/configuration.dart';
 
 class WaitingforScreen extends StatelessWidget {
+  final _config = servicesLocator<ConfigurationService>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,8 +19,7 @@ class WaitingforScreen extends StatelessWidget {
           SizedBox(height: 10),
           Text(
             'Waiting for implementation...',
-            style:
-                TextStyle(fontSize: 20, color: Theme.of(context).primaryColor),
+            style: TextStyle(fontSize: 20, color: _config.appColor["text"]),
             textAlign: TextAlign.center,
           ),
         ],
