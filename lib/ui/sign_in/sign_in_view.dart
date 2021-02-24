@@ -13,34 +13,44 @@ class _SignInViewState extends State<SignInView> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return ViewModelBuilder<SignInViewModel>.reactive(
-      builder: (context, model, child) => Scaffold(
-          body: Center(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-            _image(),
-            SizedBox(height: screenSize.height * 0.2),
-            _loginButton(model)
-          ]))),
+      builder: (context, model, child) => Stack(
+        children: <Widget>[
+          new Container(
+            height: screenSize.height,
+            width: screenSize.width,
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: new AssetImage("images/main.png"),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  SizedBox(height: screenSize.height * 0.5),
+                  _loginButton(model, screenSize.width * 0.45)
+                ])),
+          ),
+        ],
+      ),
       viewModelBuilder: () => SignInViewModel(),
     );
   }
 
-  Widget _image() {
-    return Image.asset(
-      /// TODO: change
-      "images/success.png",
-      width: 100,
-      height: 100,
-    );
-  }
-
-  Widget _loginButton(SignInViewModel model) {
-    return GestureDetector(
-      child: Image.asset(
-        "images/login/btn_login_base.png",
-      ),
-      onTap: model.login,
-    );
+  Widget _loginButton(SignInViewModel model, double width) {
+    return ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: width,
+        ),
+        child: GestureDetector(
+          child: Image.asset(
+            "images/login/btn_login_base.png",
+          ),
+          onTap: model.login,
+        ));
   }
 }
