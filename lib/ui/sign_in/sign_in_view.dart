@@ -11,10 +11,27 @@ class SignInView extends StatefulWidget {
 class _SignInViewState extends State<SignInView> {
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return ViewModelBuilder<SignInViewModel>.reactive(
-      builder: (context, model, child) =>
-          Scaffold(body: Center(child: _loginButton(model))),
+      builder: (context, model, child) => Scaffold(
+          body: Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+            _image(),
+            SizedBox(height: screenSize.height * 0.2),
+            _loginButton(model)
+          ]))),
       viewModelBuilder: () => SignInViewModel(),
+    );
+  }
+
+  Widget _image() {
+    return Image.asset(
+      /// TODO: change
+      "images/success.png",
+      width: 100,
+      height: 100,
     );
   }
 

@@ -29,12 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     /// - #3f3f3f グレー
     /// - #dfefff 薄い青
-    final appTheme = ThemeData(
-      primaryColor: Color(0xff3f3f3f),
-      backgroundColor: Color(0xffdfefff),
-      textTheme: GoogleFonts.robotoTextTheme(Theme.of(context).textTheme),
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-    );
+    final appTheme = ThemeData();
 
     return MaterialApp(
       title: 'Wish',

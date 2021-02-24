@@ -6,6 +6,7 @@ import 'package:my_app/ui/category/category_viewmodel.dart';
 import 'package:my_app/shared/loading.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/navigation.dart';
+import 'package:my_app/services/configuration.dart';
 
 class CategoryView extends StatelessWidget {
   @override
@@ -21,18 +22,21 @@ class CategoryView extends StatelessWidget {
   }
 
   Widget _categoryView(context, CategoryViewModel model, Size screenSize) {
+    final _config = servicesLocator<ConfigurationService>();
     final category_tabs = model.category_tabs;
     return DefaultTabController(
         length: category_tabs.length,
         child: Scaffold(
           appBar: AppBar(
-              backgroundColor: Colors.white,
+              backgroundColor: _config.appColor["categoryAppBarBackground"],
               bottom: PreferredSize(
                   preferredSize: Size.fromHeight(20),
                   child: TabBar(
-                    indicatorColor: Colors.green,
-                    labelColor: Colors.green,
-                    unselectedLabelColor: Colors.grey,
+                    indicatorColor:
+                        _config.appColor["categoryAppBarTabIndicator"],
+                    labelColor: _config.appColor["categoryAppBarTabLabel"],
+                    unselectedLabelColor:
+                        _config.appColor["categoryAppBarTabUnselectedLabel"],
                     labelStyle: TextStyle(fontSize: 12),
                     isScrollable: true,
                     tabs: category_tabs,
@@ -41,6 +45,7 @@ class CategoryView extends StatelessWidget {
               children: category_tabs
                   .map((tab) => _wishList(context, model, tab.text))
                   .toList()),
+          backgroundColor: _config.appColor["categoryBodyBackground"],
         ));
   }
 
@@ -59,9 +64,11 @@ class CategoryView extends StatelessWidget {
     /// TODO: 適当に決めたので修正
     final double topDownPaddingSize = 20.0 - wish.star * 2.0;
     final double leftPaddingSize = 1.1 * (5.0 - wish.star);
+    final _config = servicesLocator<ConfigurationService>();
 
     return Card(
       child: ListTile(
+        tileColor: _config.appColor["wishTileBackground"],
         leading: Padding(
           padding: EdgeInsets.only(
               left: leftPaddingSize,
@@ -69,7 +76,8 @@ class CategoryView extends StatelessWidget {
               bottom: topDownPaddingSize),
           child: Image.asset("images/heart.png"),
         ),
-        title: Text(wish.name),
+        title: Text(wish.name,
+            style: TextStyle(color: _config.appColor["wishTileFont"])),
 
         /// 削除ボタン
         trailing: IconButton(
@@ -121,6 +129,8 @@ Future showDeleteDialog(context, CategoryViewModel model, Wish wish) {
 
 Future showWishDetailDialog(context, Wish wish) {
   final _navigator = servicesLocator<NavigationService>();
+  final _config = servicesLocator<ConfigurationService>();
+
   return showDialog(
     context: context,
     builder: (context) {
@@ -130,7 +140,7 @@ Future showWishDetailDialog(context, Wish wish) {
         children: <Widget>[
           AlertDialog(
             title: Text(wish.name),
-            backgroundColor: Colors.white,
+            backgroundColor: _config.appColor["dialogBackground"],
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
@@ -159,14 +169,16 @@ Widget _detailTile(
   text,
   icon,
 ) {
+  final _config = servicesLocator<ConfigurationService>();
   return Container(
       decoration: new BoxDecoration(
-          border:
-              new Border(bottom: BorderSide(width: 1.0, color: Colors.grey))),
+          border: new Border(
+              bottom: BorderSide(
+                  width: 1.0, color: _config.appColor["dialogBorder"]))),
       child: ListTile(
           leading: icon,
           title: Text(
             text,
-            style: TextStyle(color: Colors.black, fontSize: 15.0),
+            style: TextStyle(color: _config.appColor["text"], fontSize: 15.0),
           )));
 }

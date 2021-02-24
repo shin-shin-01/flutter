@@ -72,6 +72,8 @@ flutter:
     - images/
     - images/categories/
     - images/login/
+    - images/tabmenu/
+    - images/form/
     - .env
 
   # An image asset can refer to one or more resolution-specific "variants", see

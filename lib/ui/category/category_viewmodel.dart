@@ -38,8 +38,8 @@ class CategoryViewModel extends BaseViewModel {
             icon: Image.asset(
               "images/categories/${c.name}.png",
               // TODO: don't use integer
-              width: 40,
-              height: 40,
+              width: 30,
+              height: 30,
             ),
             iconMargin: EdgeInsets.only(top: 4.0)))
         .toList() as List<Tab>;

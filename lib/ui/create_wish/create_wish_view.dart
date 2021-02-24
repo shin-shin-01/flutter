@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/navigation.dart';
+import 'package:my_app/services/configuration.dart';
 import 'package:my_app/ui/create_wish/create_wish_form.dart';
 import 'package:my_app/ui/create_wish/create_wish_form_func.dart';
 
@@ -9,6 +10,7 @@ import 'package:my_app/ui/create_wish/create_wish_form_func.dart';
 /// CreateWishView Main画面
 class CreateWishView extends StatelessWidget {
   final _navigation = servicesLocator<NavigationService>();
+  final _config = servicesLocator<ConfigurationService>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +28,9 @@ class CreateWishView extends StatelessWidget {
               child: Scaffold(
                 appBar: AppBar(
                   title: Text("Create Wish!",
-                      style: TextStyle(color: Theme.of(context).primaryColor)),
-                  backgroundColor: Colors.white,
+                      style: TextStyle(color: _config.appColor["text"])),
+                  backgroundColor:
+                      _config.appColor["createWishAppBarBackgound"],
                 ),
                 body: FormBlocListener<CreateWishFormBloc, String, String>(
                   /// 成功時の処理
@@ -37,6 +40,7 @@ class CreateWishView extends StatelessWidget {
                   onFailure: (context, state) {},
                   child: FormView(),
                 ),
+                backgroundColor: _config.appColor["createWishBodyBackground"],
               ));
         }));
   }

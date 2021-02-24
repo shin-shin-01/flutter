@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:my_app/shared/progress.dart';
 import 'package:my_app/ui/create_wish/create_wish_form_func.dart';
+import 'package:my_app/services_locator.dart';
+import 'package:my_app/services/configuration.dart';
 
 /// Form画面を作成
 class FormView extends StatelessWidget {
@@ -46,6 +48,7 @@ class ProgressField extends StatelessWidget {
 }
 
 class NameField extends StatelessWidget {
+  final _config = servicesLocator<ConfigurationService>();
   @override
   Widget build(BuildContext context) {
     final formBloc = BlocProvider.of<CreateWishFormBloc>(context);
@@ -53,12 +56,21 @@ class NameField extends StatelessWidget {
       textFieldBloc: formBloc.name,
       decoration: InputDecoration(
           labelText: 'Name',
-          prefixIcon: PrefixIcon(iconUrl: "images/alphabet.png")),
+          filled: true,
+          fillColor: _config.appColor["createWishFormBackground"],
+          labelStyle: TextStyle(color: _config.appColor["createWishFont"]),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: _config.appColor["createFormBorderColor"],
+            ),
+          ),
+          prefixIcon: PrefixIcon(iconUrl: "images/form/alphabet.png")),
     );
   }
 }
 
 class CategoryField extends StatelessWidget {
+  final _config = servicesLocator<ConfigurationService>();
   @override
   Widget build(BuildContext context) {
     final formBloc = BlocProvider.of<CreateWishFormBloc>(context);
@@ -66,13 +78,22 @@ class CategoryField extends StatelessWidget {
       selectFieldBloc: formBloc.category,
       decoration: InputDecoration(
           labelText: 'Category',
-          prefixIcon: PrefixIcon(iconUrl: "images/search.png")),
+          filled: true,
+          fillColor: _config.appColor["createWishFormBackground"],
+          labelStyle: TextStyle(color: _config.appColor["createWishFont"]),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: _config.appColor["createFormBorderColor"],
+            ),
+          ),
+          prefixIcon: PrefixIcon(iconUrl: "images/form/search.png")),
       itemBuilder: (context, value) => value,
     );
   }
 }
 
 class StarField extends StatelessWidget {
+  final _config = servicesLocator<ConfigurationService>();
   @override
   Widget build(BuildContext context) {
     final formBloc = BlocProvider.of<CreateWishFormBloc>(context);
@@ -80,27 +101,36 @@ class StarField extends StatelessWidget {
       selectFieldBloc: formBloc.star,
       decoration: InputDecoration(
           labelText: 'Star',
-          prefixIcon: PrefixIcon(iconUrl: "images/love.png")),
+          filled: true,
+          fillColor: _config.appColor["createWishFormBackground"],
+          labelStyle: TextStyle(color: _config.appColor["createWishFont"]),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: _config.appColor["createFormBorderColor"],
+            ),
+          ),
+          prefixIcon: PrefixIcon(iconUrl: "images/form/love.png")),
       itemBuilder: (context, value) => value,
     );
   }
 }
 
 class SubmitButton extends StatelessWidget {
+  final _config = servicesLocator<ConfigurationService>();
   @override
   Widget build(BuildContext context) {
     final formBloc = BlocProvider.of<CreateWishFormBloc>(context);
-    return OutlineButton.icon(
+    return FlatButton.icon(
       icon: Image.asset(
-        "images/upload.png",
+        "images/form/upload.png",
         width: 30,
         height: 30,
       ),
       label: Text(
         'SUBMIT',
-        style: TextStyle(color: Theme.of(context).primaryColor),
+        style: TextStyle(color: _config.appColor["text"]),
       ),
-      color: Colors.blue.withOpacity(0.2),
+      color: _config.appColor["createWishSubmitBackground"],
       onPressed: formBloc.submit,
     );
   }

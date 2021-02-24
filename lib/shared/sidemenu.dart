@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/services_locator.dart';
+import 'package:my_app/services/configuration.dart';
 
 /// SideMenu
 class SideMenu extends StatelessWidget {
+  final _config = servicesLocator<ConfigurationService>();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -9,7 +12,7 @@ class SideMenu extends StatelessWidget {
       children: <Widget>[
         DrawerHeader(
           child: Text('My App'),
-          decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+          decoration: BoxDecoration(color: _config.appColor["sideMenuHeader"]),
         ),
         // sideMenuの要素
         ..._menuItems(context)
