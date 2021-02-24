@@ -49,6 +49,7 @@ class ConfigurationService {
     "appBarBackground":
         Color(colors[colorTheme]["naviBackgroundColor"]).withOpacity(0.5),
     "appBarIconBackground": Colors.transparent,
+    "appBarIcon": Color(colors[colorTheme]["secondColor"]),
 
     /// appBottom
     "bottomBackground": Color(colors[colorTheme]["bottomNaviBackgroundColor"]),

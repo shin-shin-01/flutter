@@ -8,6 +8,9 @@ Widget RootAppBar() {
   final _config = servicesLocator<ConfigurationService>();
 
   return AppBar(
+      iconTheme: IconThemeData(
+        color: _config.appColor["appBarIcon"],
+      ),
       flexibleSpace: Image.asset('images/header.png', fit: BoxFit.cover),
       actions: <Widget>[ProfileIconButton(picturUrl: _auth.picturUrl)],
       backgroundColor: _config.appColor["appBarBackground"],
