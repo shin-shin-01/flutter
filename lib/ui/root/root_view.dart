@@ -22,6 +22,7 @@ class RootView extends StatelessWidget {
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           // selectedItemColor: Colors.amber[800],
+          backgroundColor: _config.appColor["bottomBackground"],
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: model.bottomNavigationBarItems,
@@ -29,7 +30,6 @@ class RootView extends StatelessWidget {
           onTap: model.onItemTapped,
         ),
         body: model.selectedWidget,
-        backgroundColor: _config.appColor["rootBackground"],
         // TODO: imple this
         // floatingActionButton: FloatingActionButton(
         //   onPressed: () => model.onPlusButtomTapped(),

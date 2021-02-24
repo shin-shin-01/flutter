@@ -45,6 +45,7 @@ class CategoryView extends StatelessWidget {
               children: category_tabs
                   .map((tab) => _wishList(context, model, tab.text))
                   .toList()),
+          backgroundColor: _config.appColor["categoryBodyBackground"],
         ));
   }
 
@@ -63,9 +64,11 @@ class CategoryView extends StatelessWidget {
     /// TODO: 適当に決めたので修正
     final double topDownPaddingSize = 20.0 - wish.star * 2.0;
     final double leftPaddingSize = 1.1 * (5.0 - wish.star);
+    final _config = servicesLocator<ConfigurationService>();
 
     return Card(
       child: ListTile(
+        tileColor: _config.appColor["wishTileBackground"],
         leading: Padding(
           padding: EdgeInsets.only(
               left: leftPaddingSize,
@@ -73,7 +76,8 @@ class CategoryView extends StatelessWidget {
               bottom: topDownPaddingSize),
           child: Image.asset("images/heart.png"),
         ),
-        title: Text(wish.name),
+        title: Text(wish.name,
+            style: TextStyle(color: _config.appColor["wishTileFont"])),
 
         /// 削除ボタン
         trailing: IconButton(

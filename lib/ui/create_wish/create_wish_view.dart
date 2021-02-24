@@ -29,7 +29,8 @@ class CreateWishView extends StatelessWidget {
                 appBar: AppBar(
                   title: Text("Create Wish!",
                       style: TextStyle(color: _config.appColor["text"])),
-                  backgroundColor: _config.appColor["createWishBackgound"],
+                  backgroundColor:
+                      _config.appColor["createWishAppBarBackgound"],
                 ),
                 body: FormBlocListener<CreateWishFormBloc, String, String>(
                   /// 成功時の処理
@@ -39,6 +40,7 @@ class CreateWishView extends StatelessWidget {
                   onFailure: (context, state) {},
                   child: FormView(),
                 ),
+                backgroundColor: _config.appColor["createWishBodyBackground"],
               ));
         }));
   }

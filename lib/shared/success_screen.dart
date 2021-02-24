@@ -13,38 +13,38 @@ class SuccessScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     /// TODO: 値を直接指定しすぎ
     return Scaffold(
+        backgroundColor: _config.appColor["successBackground"],
         body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Image.asset(
-            "images/success.png",
-            width: 100,
-            height: 100,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset(
+                "images/success.png",
+                width: 100,
+                height: 100,
+              ),
+              SizedBox(height: 10),
+              Text(
+                '追加しました!',
+                style: TextStyle(fontSize: 40, color: _config.appColor["text"]),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 20),
+              FloatingActionButton.extended(
+                icon: Image.asset(
+                  "images/tabmenu/cart.png",
+                  width: 30,
+                  height: 30,
+                ),
+                label: Text(
+                  'Check!',
+                  style: TextStyle(color: _config.appColor["text"]),
+                ),
+                backgroundColor: _config.appColor["successButtonBackground"],
+                onPressed: () => _navigation.pushAndReplace(routeName: '/root'),
+              ),
+            ],
           ),
-          SizedBox(height: 10),
-          Text(
-            '追加しました!',
-            style:
-                TextStyle(fontSize: 40, color: Theme.of(context).primaryColor),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 20),
-          FloatingActionButton.extended(
-            icon: Image.asset(
-              "images/tabmenu/cart.png",
-              width: 30,
-              height: 30,
-            ),
-            label: Text(
-              'Check!',
-              style: TextStyle(color: _config.appColor["text"]),
-            ),
-            backgroundColor: _config.appColor["successBackground"],
-            onPressed: () => _navigation.pushAndReplace(routeName: '/root'),
-          ),
-        ],
-      ),
-    ));
+        ));
   }
 }
