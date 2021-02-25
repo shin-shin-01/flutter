@@ -11,7 +11,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>my_app</string>
+	<string>wish</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -58,8 +58,8 @@
 	<false/>
 	<key>LineSDKConfig</key>
 	<dict>
-    <key>ChannelID</key>
-    <string>$(LINE_CHANNEL_ID)</string>
-</dict>
+		<key>ChannelID</key>
+		<string>$(LINE_CHANNEL_ID)</string>
+	</dict>
 </dict>
 </plist>
