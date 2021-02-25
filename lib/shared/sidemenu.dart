@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/configuration.dart';
 import 'package:my_app/services/navigation.dart';
+import 'package:my_app/services/data.dart';
 
 /// SideMenu
 class SideMenu extends StatelessWidget {
@@ -29,7 +30,23 @@ class SideMenu extends StatelessWidget {
 
 /// sideMenu の要素　(Header 以外)
 List<Widget> _menuItems(BuildContext context) {
-  return [_logoutTile(context), _settingTile(context)];
+  return [_accountIdTile(), _logoutTile(context), _settingTile(context)];
+}
+
+/// アカウントID
+Widget _accountIdTile() {
+  final _data = servicesLocator<DataService>();
+  final user = _data.Me;
+
+  return ListTile(
+      title: Text(user.account_id),
+      leading: Padding(
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(user.picture_url),
+          radius: 16,
+        ),
+        padding: EdgeInsets.all(8.0),
+      ));
 }
 
 /// ログアウト
