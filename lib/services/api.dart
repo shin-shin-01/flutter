@@ -7,11 +7,13 @@ import 'package:my_app/model/wish.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/authentication.dart';
 import 'package:my_app/services/configuration.dart';
+import 'package:my_app/services/data.dart';
 
 /// API Service
 class APIService {
   final _auth = servicesLocator<AuthService>();
   final _config = servicesLocator<ConfigurationService>();
+  final _data = servicesLocator<DataService>();
 
   String _apiUrl;
   int _apiVersion;
@@ -31,7 +33,7 @@ class APIService {
 
   /// HTTP Request Headers required to connect with API Server
   Future<Map<String, String>> authorizedHeader() async {
-    final idToken = await _auth.accessToken;
+    final idToken = await _data.accessToken;
     return {_authorizationHeaderName: idToken};
   }
 
@@ -51,16 +53,19 @@ class APIService {
   }
 
   /// createUsers
-  Future<User> createUser() async {
+  Future<void> createUser() async {
     final endpoint = '/users';
     final url = requestUrl(endpoint);
     final headers = await authorizedHeaderWithJson();
 
-    final name = await _auth.name;
-    final uid = await _auth.uid;
+    final user = await _data.getMe;
 
     final payload = jsonEncode({
-      'user': {'name': name, 'uid': uid}
+      'user': {
+        'name': user.name,
+        'uid': user.uid,
+        'picture_url': user.picture_url
+      }
     });
 
     final response = await http.post(url, headers: headers, body: payload);
@@ -68,12 +73,13 @@ class APIService {
     /// TODO: error Handling
     if (response.statusCode != 201) return null;
 
-    return parseUsers(response.body);
+    await _data.saveUser(parseUsers(response.body));
   }
 
   /// createWishes
   Future<void> createWish(String name, int star, int category_id) async {
-    final uid = await _auth.uid;
+    final user = await _data.getMe;
+    final uid = user.uid;
 
     final endpoint = '/users/$uid/wishes';
     final url = requestUrl(endpoint);
@@ -88,7 +94,8 @@ class APIService {
 
   /// updateWish
   Future<void> updateWish(int id, bool deleted) async {
-    final uid = await _auth.uid;
+    final user = await _data.getMe;
+    final uid = user.uid;
 
     final endpoint = '/users/$uid/wishes/$id';
     final url = requestUrl(endpoint);
@@ -142,7 +149,8 @@ class APIService {
 
   /// getWishes
   Future<Map<String, List<Wish>>> getWishes() async {
-    final uid = await _auth.uid;
+    final user = await _data.getMe;
+    final uid = user.uid;
 
     final endpoint = '/users/$uid/wishes';
     final url = requestUrl(endpoint);
