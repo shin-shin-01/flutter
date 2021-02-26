@@ -4,6 +4,7 @@ import 'package:my_app/model/todo.dart';
 import 'package:my_app/model/category.dart';
 import 'package:my_app/model/user.dart';
 import 'package:my_app/model/wish.dart';
+import 'package:my_app/model/friend.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/authentication.dart';
 import 'package:my_app/services/configuration.dart';
@@ -47,7 +48,7 @@ class APIService {
   /// データ整形
   User parseUsers(String responseBody) {
     final data = json.decode(responseBody)['user'];
-    final user = data.fromJson();
+    final user = User.fromJson(data);
 
     return user;
   }
@@ -71,8 +72,6 @@ class APIService {
     final response = await http.post(url, headers: headers, body: payload);
 
     /// TODO: error Handling
-    if (response.statusCode != 201) return null;
-
     await _data.saveUser(parseUsers(response.body));
   }
 
@@ -161,6 +160,42 @@ class APIService {
     if (response.statusCode != 200) return null;
 
     return parseWishes(response.body);
+  }
+
+  /// データ整形
+  Friend parseFriend(String responseBody) {
+    final data = json.decode(responseBody)['data'];
+    final friend = Friend.fromJson(data);
+    return friend;
+  }
+
+  /// showUser
+  Future<Friend> showUser(String accountId) async {
+    final endpoint = '/users/$accountId';
+    final url = requestUrl(endpoint);
+    final headers = await authorizedHeader();
+
+    final response = await http.get(url, headers: headers);
+
+    if (response.statusCode != 200) return null;
+
+    return parseFriend(response.body);
+  }
+
+  /// createFriend
+  Future<Friend> createFriend(Friend friend) async {
+    final user = await _data.getMe;
+    final uid = user.uid;
+
+    final endpoint = '/users/$uid/friends';
+    final url = requestUrl(endpoint);
+    final headers = await authorizedHeaderWithJson();
+
+    final payload = jsonEncode({
+      'friend': {'friend_user_id': friend.id}
+    });
+
+    final response = await http.post(url, headers: headers, body: payload);
   }
 
   /// getTodos Fakefunction
