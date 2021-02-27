@@ -40,7 +40,7 @@ List<Widget> _menuItems(BuildContext context) {
   ];
 }
 
-/// アカウントID
+/// アカウントID Tile
 Widget _userTile(context) {
   final _data = servicesLocator<DataService>();
   final user = _data.Me;
@@ -58,13 +58,16 @@ Widget _userTile(context) {
   );
 }
 
+/// - アカウントID ShowDialog
 Future accountIDDialog(context, String account_id) {
+  final _config = servicesLocator<ConfigurationService>();
   final _navigation = servicesLocator<NavigationService>();
   return showDialog(
     context: context,
     builder: (_) {
       return AlertDialog(
         title: Text("アカウントID"),
+        backgroundColor: _config.appColor["sideMenuDialogBackground"],
         content: Text(account_id),
         actions: <Widget>[
           FlatButton(
@@ -77,7 +80,7 @@ Future accountIDDialog(context, String account_id) {
   );
 }
 
-/// ログアウト
+/// ログアウト Tile
 Widget _logoutTile(context) {
   return ListTile(
     title: Text('ログアウト'),
@@ -89,13 +92,16 @@ Widget _logoutTile(context) {
   );
 }
 
+/// - ログアウト ShowDialog
 Future logoutDialog(context) {
+  final _config = servicesLocator<ConfigurationService>();
   final _navigation = servicesLocator<NavigationService>();
   return showDialog(
     context: context,
     builder: (_) {
       return AlertDialog(
         content: Text('ログアウトしますか？'),
+        backgroundColor: _config.appColor["sideMenuDialogBackground"],
         actions: <Widget>[
           FlatButton(
             child: Text("CANCEL"),
@@ -114,7 +120,7 @@ Future logoutDialog(context) {
   );
 }
 
-/// 設定
+/// 設定 Tile
 Widget _settingTile(context) {
   return ListTile(
     title: Text('設定'),
@@ -126,7 +132,7 @@ Widget _settingTile(context) {
   );
 }
 
-/// 友達
+/// 友達 Tile
 Widget _addFriendTile(context) {
   return ListTile(
     title: Text('フレンド'),
@@ -138,8 +144,9 @@ Widget _addFriendTile(context) {
   );
 }
 
-/// 友人メインダイアログ
+/// - 友人 Showdialog
 Future friendDialog(context) {
+  final _config = servicesLocator<ConfigurationService>();
   final _api = servicesLocator<APIService>();
   final _data = servicesLocator<DataService>();
   final _form = GlobalKey<FormState>();
@@ -158,6 +165,7 @@ Future friendDialog(context) {
         return AlertDialog(
             scrollable: true,
             title: Text('友達一覧'),
+            backgroundColor: _config.appColor["sideMenuDialogBackground"],
             content: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Form(
@@ -190,7 +198,7 @@ Future friendDialog(context) {
       });
 }
 
-/// 友人一覧コンテナ
+/// --- 友人一覧コンテナ
 Widget friendListContainer(context, friends) {
   return Container(
       height: 300,
@@ -203,14 +211,13 @@ Widget friendListContainer(context, friends) {
           itemBuilder: (context, i) => _friendTile(context, friends[i])));
 }
 
-/// 友人表示タイル
+/// -- 友人表示タイル
 Widget _friendTile(context, Friend friend) {
   final _config = servicesLocator<ConfigurationService>();
 
   return Card(
     child: ListTile(
-      /// TODO : fix-this
-      tileColor: _config.appColor["wishTileBackground"],
+      tileColor: _config.appColor["sideMenuTileBackground"],
       leading: Padding(
         child: CircleAvatar(
           backgroundImage: NetworkImage(friend.picture_url),
@@ -224,16 +231,18 @@ Widget _friendTile(context, Friend friend) {
   );
 }
 
-/// 友人追加確認 api実行
+/// --- 友人追加確認 api実行 ShowDialog
 Future addFriendDialog(context, Friend friend) {
   final _api = servicesLocator<APIService>();
   final _navigation = servicesLocator<NavigationService>();
+  final _config = servicesLocator<ConfigurationService>();
 
   return showDialog(
     context: context,
     builder: (_) {
       return AlertDialog(
         title: Text('友達になりますか？'),
+        backgroundColor: _config.appColor["sideMenuDialogBackground"],
         content: ListTile(
           title: Text(friend.name),
           leading: Padding(
