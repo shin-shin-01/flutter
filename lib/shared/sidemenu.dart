@@ -34,7 +34,7 @@ class SideMenu extends StatelessWidget {
 List<Widget> _menuItems(BuildContext context) {
   return [
     _accountIdTile(),
-    _friendTile(context),
+    _addFriendTile(context),
     _logoutTile(context),
     _settingTile(context)
   ];
@@ -106,23 +106,26 @@ Widget _settingTile(context) {
 }
 
 /// 友達
-Widget _friendTile(context) {
+Widget _addFriendTile(context) {
   return ListTile(
     title: Text('フレンド'),
     leading: Padding(
       child: Image.asset("images/tabmenu/friend.png"),
       padding: EdgeInsets.all(8.0),
     ),
-    onTap: () => friendSearchDialog(context),
+    onTap: () => friendDialog(context),
   );
 }
 
-Future friendSearchDialog(context) {
+/// 友人メインダイアログ
+Future friendDialog(context) {
   final _api = servicesLocator<APIService>();
-  final _navigation = servicesLocator<NavigationService>();
+  final _data = servicesLocator<DataService>();
   final _form = GlobalKey<FormState>();
+
   String _account_id = '';
   Friend friend;
+  final friends = _data.getMyFriends;
 
   Future _submission() async {
     friend = await _api.showUser(_account_id);
@@ -134,13 +137,14 @@ Future friendSearchDialog(context) {
       builder: (_) {
         return AlertDialog(
             scrollable: true,
-            title: Text('友達追加'),
+            title: Text('友達一覧'),
             content: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Form(
                 key: _form,
                 child: Column(
                   children: <Widget>[
+                    friendListContainer(context, friends),
                     TextFormField(
                         decoration: InputDecoration(
                           labelText: 'Account ID',
@@ -158,7 +162,6 @@ Future friendSearchDialog(context) {
                 child: Text("検索"),
                 onPressed: () async {
                   _form.currentState.save();
-                  // _navigation.pop();
                   await _submission();
                   addFriendDialog(context, friend);
                 },
@@ -167,6 +170,41 @@ Future friendSearchDialog(context) {
       });
 }
 
+/// 友人一覧コンテナ
+Widget friendListContainer(context, friends) {
+  return Container(
+      height: 300,
+      width: 200,
+      child: ListView.builder(
+          shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
+          // padding: EdgeInsets.all(8),
+          itemCount: friends.length,
+          itemBuilder: (context, i) => _friendTile(context, friends[i])));
+}
+
+/// 友人表示タイル
+Widget _friendTile(context, Friend friend) {
+  final _config = servicesLocator<ConfigurationService>();
+
+  return Card(
+    child: ListTile(
+      /// TODO : fix-this
+      tileColor: _config.appColor["wishTileBackground"],
+      leading: Padding(
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(friend.picture_url),
+          radius: 16,
+        ),
+        padding: EdgeInsets.all(1.0),
+      ),
+      title: Text(friend.name,
+          style: TextStyle(color: _config.appColor["wishTileFont"])),
+    ),
+  );
+}
+
+/// 友人追加確認 api実行
 Future addFriendDialog(context, Friend friend) {
   final _api = servicesLocator<APIService>();
   final _navigation = servicesLocator<NavigationService>();
