@@ -196,6 +196,36 @@ class APIService {
     });
 
     final response = await http.post(url, headers: headers, body: payload);
+
+    /// 友人取得再実行
+    await getFriends();
+  }
+
+  /// データ整形
+  List<Friend> parseFriends(String responseBody) {
+    final data = json.decode(responseBody)['data'];
+    final friends = data
+        .map<Friend>((json) => Friend.fromJson(json as Map<String, dynamic>))
+        .toList() as List<Friend>;
+    return friends;
+  }
+
+  /// getFriends
+  Future<void> getFriends() async {
+    final user = await _data.getMe;
+    final uid = user.uid;
+
+    final endpoint = '/users/$uid/friends';
+    final url = requestUrl(endpoint);
+    final headers = await authorizedHeader();
+
+    final response = await http.get(url, headers: headers);
+
+    if (response.statusCode != 200) return null;
+
+    List<Friend> friends = parseFriends(response.body);
+
+    await _data.saveFriends(friends);
   }
 
   /// getTodos Fakefunction
