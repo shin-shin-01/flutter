@@ -33,7 +33,7 @@ class SideMenu extends StatelessWidget {
 /// sideMenu の要素　(Header 以外)
 List<Widget> _menuItems(BuildContext context) {
   return [
-    _accountIdTile(),
+    _userTile(context),
     _addFriendTile(context),
     _logoutTile(context),
     _settingTile(context)
@@ -41,19 +41,40 @@ List<Widget> _menuItems(BuildContext context) {
 }
 
 /// アカウントID
-Widget _accountIdTile() {
+Widget _userTile(context) {
   final _data = servicesLocator<DataService>();
   final user = _data.Me;
 
   return ListTile(
-      title: Text(user.account_id),
-      leading: Padding(
-        child: CircleAvatar(
-          backgroundImage: NetworkImage(user.picture_url),
-          radius: 16,
-        ),
-        padding: EdgeInsets.all(8.0),
-      ));
+    title: Text(user.name),
+    leading: Padding(
+      child: CircleAvatar(
+        backgroundImage: NetworkImage(user.picture_url),
+        radius: 16,
+      ),
+      padding: EdgeInsets.all(8.0),
+    ),
+    onTap: () => accountIDDialog(context, user.account_id),
+  );
+}
+
+Future accountIDDialog(context, String account_id) {
+  final _navigation = servicesLocator<NavigationService>();
+  return showDialog(
+    context: context,
+    builder: (_) {
+      return AlertDialog(
+        title: Text("アカウントID"),
+        content: Text(account_id),
+        actions: <Widget>[
+          FlatButton(
+            child: Text("OK"),
+            onPressed: () => _navigation.pop(),
+          ),
+        ],
+      );
+    },
+  );
 }
 
 /// ログアウト
@@ -129,7 +150,6 @@ Future friendDialog(context) {
 
   Future _submission() async {
     friend = await _api.showUser(_account_id);
-    print(friend.name);
   }
 
   return showDialog(
