@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class ConfigurationService {
   /// apiRootUrl
   String get apiRootUrl {
-    return 'https://wishapp-api.herokuapp.com';
-    // return 'http://localhost:3000';
+    // return 'https://wishapp-api.herokuapp.com';
+    return 'http://localhost:3000';
   }
 
   /// apiVersion
@@ -25,11 +25,14 @@ class ConfigurationService {
       /// 濃いベージュ
       "naviBackgroundColor": 0xffD3C3BF,
       "bottomNaviBackgroundColor": 0xffD3C3BF,
+      "sideMenuTileBackground": 0xffD3C3BF,
 
       /// ライトベージュ
       "listColor": 0xffEEE8E1,
       "formColor": 0xffEEE8E1,
       "buttonBackground": 0xffEEE8E1,
+      "sidemenuDialogFont": 0xffEEE8E1,
+      "sidemenuDialogBackground": 0xffEEE8E1,
 
       "formBorderColor": 0xff9E837B,
 
@@ -57,6 +60,11 @@ class ConfigurationService {
     /// sideMenu
     "sideMenuHeader":
         Color(colors[colorTheme]["naviBackgroundColor"]).withOpacity(0.9),
+    "sideMenuDialogBackground":
+        Color(colors[colorTheme]["sidemenuDialogBackground"]),
+    "sideMenuTileBackground": Color(colors[colorTheme]["backgroundColor"]),
+    // "sideMenuDialogFont": Color(colors[colorTheme]["sidemenuDialogFont"]),
+    "sideMenuDialogBorder": Color(colors[colorTheme]["font"]),
 
     /// progressBar
     "progressBar": Color(colors[colorTheme]["secondColor"]).withAlpha(150),

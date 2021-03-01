@@ -15,5 +15,6 @@ class SignInViewModel extends BaseViewModel {
 
     /// TODO: User情報どこかにセットする必要あるかも
     await _api.createUser();
+    await _api.getFriends();
   }
 }
