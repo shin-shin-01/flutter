@@ -237,6 +237,24 @@ Future addFriendDialog(context, Friend friend) {
   final _navigation = servicesLocator<NavigationService>();
   final _config = servicesLocator<ConfigurationService>();
 
+  /// ユーザが存在しないときの処理
+  if (friend == null) {
+    return showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            backgroundColor: _config.appColor["sideMenuDialogBackground"],
+            content: Text("ユーザが存在しません"),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("OK"),
+                onPressed: () => _navigation.pop(),
+              ),
+            ],
+          );
+        });
+  }
+
   return showDialog(
     context: context,
     builder: (_) {
