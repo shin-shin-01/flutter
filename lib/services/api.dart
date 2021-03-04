@@ -129,7 +129,10 @@ class APIService {
 
     if (response.statusCode != 200) return null;
 
-    return parseCategories(response.body);
+    List<Category> categories = parseCategories(response.body);
+    await _data.saveCategories(categories);
+
+    return categories;
   }
 
   /// データ整形

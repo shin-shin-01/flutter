@@ -6,23 +6,22 @@ import 'package:my_app/model/wish.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/api.dart';
 import 'package:my_app/services/navigation.dart';
+import 'package:my_app/services/data.dart';
 
 class CategoryViewModel extends BaseViewModel {
   final _api = servicesLocator<APIService>();
   final _navigator = servicesLocator<NavigationService>();
+  final _data = servicesLocator<DataService>();
 
   /// categories
-  List<Category> categories = [];
+  List<Category> categories;
   Map<String, List<Wish>> wishes = {};
   List<Tab> category_tabs = [];
 
   Future<void> initialize() async {
     setBusy(true);
 
-    if (categories.length == 0) {
-      final getCategoriesFromApi = await _api.getCategories();
-      categories = getCategoriesFromApi;
-    }
+    categories = _data.getCategories;
     await setTabs();
 
     final getWishesFromApi = await _api.getWishes();
