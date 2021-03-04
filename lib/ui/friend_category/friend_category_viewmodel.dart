@@ -15,18 +15,22 @@ class FriendCategoryViewModel extends BaseViewModel {
 
   /// categories
   List<Category> categories;
-  Map<String, List<FriendWish>> wishes = {};
+  Map<String, List<FriendWish>> wishes;
   List<Tab> category_tabs = [];
 
   Future<void> initialize() async {
     setBusy(true);
 
-    categories = _data.getCategories;
+    categories = await _data.getCategories;
+    wishes = _data.getFriendWishes;
     await setTabs();
+    setBusy(false);
+  }
 
-    final getFriendWishesFromApi = await _api.getFriendWishes();
-    wishes = getFriendWishesFromApi;
-
+  Future<void> reload() async {
+    setBusy(true);
+    await _api.getFriendWishes();
+    wishes = _data.getFriendWishes;
     setBusy(false);
   }
 

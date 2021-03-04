@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import 'package:my_app/shared/loading.dart';
 import 'package:my_app/ui/sign_in/sign_in_viewmodel.dart';
 
 class SignInView extends StatefulWidget {
@@ -27,13 +28,15 @@ class _SignInViewState extends State<SignInView> {
           ),
           Scaffold(
             backgroundColor: Colors.transparent,
-            body: Center(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  SizedBox(height: screenSize.height * 0.5),
-                  _loginButton(model, screenSize.width * 0.45)
-                ])),
+            body: model.isBusy
+                ? Loading()
+                : Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                        SizedBox(height: screenSize.height * 0.5),
+                        _loginButton(model, screenSize.width * 0.45)
+                      ])),
           ),
         ],
       ),

@@ -45,6 +45,12 @@ class CategoryView extends StatelessWidget {
               children: category_tabs
                   .map((tab) => _wishList(context, model, tab.text))
                   .toList()),
+          floatingActionButton: FloatingActionButton(
+            onPressed: model.reload,
+            tooltip: 'Reload',
+            child: Icon(Icons.refresh),
+            backgroundColor: _config.appColor["categoryAppBarBackground"],
+          ),
           backgroundColor: _config.appColor["categoryBodyBackground"],
         ));
   }

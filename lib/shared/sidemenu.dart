@@ -43,14 +43,19 @@ List<Widget> _menuItems(BuildContext context) {
 /// アカウントID Tile
 Widget _userTile(context) {
   final _data = servicesLocator<DataService>();
+  final _config = servicesLocator<ConfigurationService>();
   final user = _data.Me;
 
   return ListTile(
     title: Text(user.name),
     leading: Padding(
       child: CircleAvatar(
-        backgroundImage: NetworkImage(user.picture_url),
-        radius: 16,
+        backgroundColor: _config.appColor["arroundProfileIcon"],
+        radius: 20,
+        child: CircleAvatar(
+          backgroundImage: NetworkImage(user.picture_url),
+          radius: 19,
+        ),
       ),
       padding: EdgeInsets.all(8.0),
     ),
@@ -137,7 +142,7 @@ Widget _addFriendTile(context) {
   return ListTile(
     title: Text('フレンド'),
     leading: Padding(
-      child: Image.asset("images/tabmenu/friend.png"),
+      child: Image.asset("images/colored_tabmenu/friend.png"),
       padding: EdgeInsets.all(8.0),
     ),
     onTap: () => friendDialog(context),
@@ -164,7 +169,7 @@ Future friendDialog(context) {
       builder: (_) {
         return AlertDialog(
             scrollable: true,
-            title: Text('友達一覧'),
+            title: Text('友達追加'),
             backgroundColor: _config.appColor["sideMenuDialogBackground"],
             content: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -172,7 +177,6 @@ Future friendDialog(context) {
                 key: _form,
                 child: Column(
                   children: <Widget>[
-                    friendListContainer(context, friends),
                     TextFormField(
                         decoration: InputDecoration(
                           labelText: 'Account ID',
@@ -181,6 +185,7 @@ Future friendDialog(context) {
                         onSaved: (value) {
                           _account_id = value;
                         }),
+                    friendListContainer(context, friends),
                   ],
                 ),
               ),
@@ -201,14 +206,14 @@ Future friendDialog(context) {
 /// --- 友人一覧コンテナ
 Widget friendListContainer(context, friends) {
   return Container(
-      height: 300,
+      height: 200,
       width: 200,
-      child: ListView.builder(
-          shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
-          // padding: EdgeInsets.all(8),
-          itemCount: friends.length,
-          itemBuilder: (context, i) => _friendTile(context, friends[i])));
+      child: Scrollbar(
+          child: ListView.builder(
+              shrinkWrap: true,
+              // padding: EdgeInsets.all(8),
+              itemCount: friends.length,
+              itemBuilder: (context, i) => _friendTile(context, friends[i]))));
 }
 
 /// -- 友人表示タイル
@@ -236,6 +241,24 @@ Future addFriendDialog(context, Friend friend) {
   final _api = servicesLocator<APIService>();
   final _navigation = servicesLocator<NavigationService>();
   final _config = servicesLocator<ConfigurationService>();
+
+  /// ユーザが存在しないときの処理
+  if (friend == null) {
+    return showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            backgroundColor: _config.appColor["sideMenuDialogBackground"],
+            content: Text("ユーザが存在しません"),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("OK"),
+                onPressed: () => _navigation.pop(),
+              ),
+            ],
+          );
+        });
+  }
 
   return showDialog(
     context: context,

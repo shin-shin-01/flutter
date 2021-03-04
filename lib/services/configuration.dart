@@ -48,11 +48,15 @@ class ConfigurationService {
   final app_color = {
     "text": Color(colors[colorTheme]["font"]),
 
+    /// icon
+    "arroundProfileIcon": Color(colors[colorTheme]["formBorderColor"]),
+
     /// appBar
     "appBarBackground":
         Color(colors[colorTheme]["naviBackgroundColor"]).withOpacity(0.5),
     "appBarIconBackground": Colors.transparent,
     "appBarIcon": Color(colors[colorTheme]["secondColor"]),
+    "appBarTop": Color(colors[colorTheme]["secondColor"]),
 
     /// appBottom
     "bottomBackground": Color(colors[colorTheme]["bottomNaviBackgroundColor"]),

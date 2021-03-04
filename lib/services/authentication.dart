@@ -5,11 +5,9 @@ import 'package:flutter_line_sdk/flutter_line_sdk.dart';
 import 'package:my_app/services/data.dart';
 
 import 'package:my_app/services_locator.dart';
-import 'package:my_app/services/navigation.dart';
 import 'package:my_app/model/user.dart';
 
 class AuthService {
-  final _navigation = servicesLocator<NavigationService>();
   final _data = servicesLocator<DataService>();
 
   Future lineLogin() async {
@@ -24,7 +22,6 @@ class AuthService {
 
       /// ユーザデータの保存
       await _data.saveUser(user, result.accessToken.value);
-      _navigation.pushAndReplace(routeName: '/root');
     } on PlatformException catch (e) {
       // Error handling.
       print(e);

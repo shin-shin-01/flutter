@@ -15,33 +15,30 @@ class RootView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<RootViewModel>.reactive(
-      viewModelBuilder: () => RootViewModel(),
-      builder: (context, model, child) => Scaffold(
-        appBar: RootAppBar(),
-        drawer: SideMenu(),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          // selectedItemColor: Colors.amber[800],
-          backgroundColor: _config.appColor["bottomBackground"],
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          items: model.bottomNavigationBarItems,
-          currentIndex: model.selectedIndex,
-          onTap: model.onItemTapped,
-        ),
-        body: model.selectedWidget,
-        // TODO: imple this
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () => model.onPlusButtomTapped(),
-        //   backgroundColor: Colors.white,
-        //   child: Image.asset(
-        //     "images/tabmenu/pencil.png",
-        //     // TODO: don't use integer
-        //     width: 40,
-        //     height: 40,
-        //   ),
-        // ),
-      ),
-    );
+        viewModelBuilder: () => RootViewModel(),
+        builder: (context, model, child) => Column(children: [
+              // アプリケーションバーの上の空白
+              Container(
+                color: _config.appColor["appBarTop"],
+                height: 20,
+              ),
+              Expanded(
+                child: Scaffold(
+                  appBar: RootAppBar(),
+                  drawer: SideMenu(),
+                  bottomNavigationBar: BottomNavigationBar(
+                    type: BottomNavigationBarType.fixed,
+                    // selectedItemColor: Colors.amber[800],
+                    backgroundColor: _config.appColor["bottomBackground"],
+                    showSelectedLabels: false,
+                    showUnselectedLabels: false,
+                    items: model.bottomNavigationBarItems,
+                    currentIndex: model.selectedIndex,
+                    onTap: model.onItemTapped,
+                  ),
+                  body: model.selectedWidget,
+                ),
+              ),
+            ]));
   }
 }
