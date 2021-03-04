@@ -15,7 +15,7 @@ class FriendCategoryViewModel extends BaseViewModel {
 
   /// categories
   List<Category> categories;
-  Map<String, List<FriendWish>> wishes = {};
+  Map<String, List<FriendWish>> wishes;
   List<Tab> category_tabs = [];
 
   Future<void> initialize() async {

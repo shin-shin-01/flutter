@@ -22,10 +22,6 @@ class SignInViewModel extends BaseViewModel {
     print("done: getFriends");
     await _api.getCategories();
     print("done: getCategories");
-    await _api.getWishes();
-    print("done: getWishes");
-    await _api.getFriendWishes();
-    print("done: getFriendWishes");
 
     _navigation.pushAndReplace(routeName: '/root');
   }

@@ -15,7 +15,7 @@ class CategoryViewModel extends BaseViewModel {
 
   /// categories
   List<Category> categories;
-  Map<String, List<Wish>> wishes = {};
+  Map<String, List<Wish>> wishes;
   List<Tab> category_tabs = [];
 
   Future<void> initialize() async {
