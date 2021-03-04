@@ -21,12 +21,16 @@ class CategoryViewModel extends BaseViewModel {
   Future<void> initialize() async {
     setBusy(true);
 
-    categories = _data.getCategories;
+    categories = await _data.getCategories;
+    wishes = _data.getWishes;
     await setTabs();
+    setBusy(false);
+  }
 
-    final getWishesFromApi = await _api.getWishes();
-    wishes = getWishesFromApi;
-
+  Future<void> reload() async {
+    setBusy(true);
+    await _api.getWishes();
+    wishes = _data.getWishes;
     setBusy(false);
   }
 
