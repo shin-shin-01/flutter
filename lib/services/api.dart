@@ -119,7 +119,7 @@ class APIService {
   }
 
   /// getCategories
-  Future<List<Category>> getCategories() async {
+  Future<void> getCategories() async {
     // if (!isReady) return null;
     final endpoint = '/categories';
     final url = requestUrl(endpoint);
@@ -131,8 +131,6 @@ class APIService {
 
     List<Category> categories = parseCategories(response.body);
     await _data.saveCategories(categories);
-
-    return categories;
   }
 
   /// データ整形
@@ -150,7 +148,7 @@ class APIService {
   }
 
   /// getWishes
-  Future<Map<String, List<Wish>>> getWishes() async {
+  Future<void> getWishes() async {
     final user = await _data.getMe;
     final uid = user.uid;
 
@@ -162,7 +160,8 @@ class APIService {
 
     if (response.statusCode != 200) return null;
 
-    return parseWishes(response.body);
+    Map<String, List<Wish>> wishes = parseWishes(response.body);
+    await _data.saveWishes(wishes);
   }
 
   /// データ整形
@@ -247,7 +246,7 @@ class APIService {
   }
 
   /// getWishes
-  Future<Map<String, List<FriendWish>>> getFriendWishes() async {
+  Future<void> getFriendWishes() async {
     final user = await _data.getMe;
     final uid = user.uid;
 
@@ -259,6 +258,7 @@ class APIService {
 
     if (response.statusCode != 200) return null;
 
-    return parseFriendWishes(response.body);
+    Map<String, List<FriendWish>> wishes = parseFriendWishes(response.body);
+    await _data.saveFriendWishes(wishes);
   }
 }
