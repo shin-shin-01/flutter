@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:my_app/ui/category/category_view.dart';
+import 'package:my_app/ui/friend_category/friend_category_view.dart';
 import 'package:my_app/ui/create_wish/create_wish_view.dart';
-import 'package:my_app/shared/waitingfor_screen.dart';
+// import 'package:my_app/shared/waitingfor_screen.dart';
 
 /// RootViewModel
 class RootViewModel extends BaseViewModel {
   int _selectedIndex = 1;
   final List<Widget> _widgetOptions = <Widget>[
-    WaitingforScreen(),
+    FriendCategoryView(),
     CategoryView(),
     CreateWishView()
   ];
