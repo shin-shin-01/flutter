@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:my_app/model/todo.dart';
 import 'package:my_app/model/category.dart';
 import 'package:my_app/model/user.dart';
 import 'package:my_app/model/wish.dart';
+import 'package:my_app/model/friend_wish.dart';
 import 'package:my_app/model/friend.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/authentication.dart';
@@ -129,7 +129,10 @@ class APIService {
 
     if (response.statusCode != 200) return null;
 
-    return parseCategories(response.body);
+    List<Category> categories = parseCategories(response.body);
+    await _data.saveCategories(categories);
+
+    return categories;
   }
 
   /// データ整形
@@ -228,13 +231,34 @@ class APIService {
     await _data.saveFriends(friends);
   }
 
-  /// getTodos Fakefunction
-  Future<List<Todo>> getTodos() async {
-    final fakeTodo = Todo(id: 1, title: "firstTodo", detail: "firstTodoDetail");
-    final fakeTodoSec =
-        Todo(id: 2, title: "secondTodo", detail: "secondTodoDetail");
+  /// データ整形
+  Map<String, List<FriendWish>> parseFriendWishes(String responseBody) {
+    final data = json.decode(responseBody)['data'];
 
-    final todos = [fakeTodo, fakeTodoSec];
-    return todos;
+    /// TODO: リファクタリング
+    final Map<String, List<FriendWish>> friend_wishes = new Map();
+    data.forEach((key, value) {
+      friend_wishes[key] = value
+          .map<FriendWish>(
+              (json) => FriendWish.fromJson(json as Map<String, dynamic>))
+          .toList() as List<FriendWish>;
+    });
+    return friend_wishes;
+  }
+
+  /// getWishes
+  Future<Map<String, List<FriendWish>>> getFriendWishes() async {
+    final user = await _data.getMe;
+    final uid = user.uid;
+
+    final endpoint = '/users/$uid/friend_wishes';
+    final url = requestUrl(endpoint);
+    final headers = await authorizedHeader();
+
+    final response = await http.get(url, headers: headers);
+
+    if (response.statusCode != 200) return null;
+
+    return parseFriendWishes(response.body);
   }
 }

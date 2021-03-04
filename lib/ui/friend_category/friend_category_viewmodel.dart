@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:my_app/model/category.dart';
-import 'package:my_app/model/wish.dart';
+import 'package:my_app/model/friend_wish.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/api.dart';
 import 'package:my_app/services/navigation.dart';
 import 'package:my_app/services/data.dart';
 
-class CategoryViewModel extends BaseViewModel {
+class FriendCategoryViewModel extends BaseViewModel {
   final _api = servicesLocator<APIService>();
   final _navigator = servicesLocator<NavigationService>();
   final _data = servicesLocator<DataService>();
 
   /// categories
   List<Category> categories;
-  Map<String, List<Wish>> wishes = {};
+  Map<String, List<FriendWish>> wishes = {};
   List<Tab> category_tabs = [];
 
   Future<void> initialize() async {
@@ -24,8 +24,8 @@ class CategoryViewModel extends BaseViewModel {
     categories = _data.getCategories;
     await setTabs();
 
-    final getWishesFromApi = await _api.getWishes();
-    wishes = getWishesFromApi;
+    final getFriendWishesFromApi = await _api.getFriendWishes();
+    wishes = getFriendWishesFromApi;
 
     setBusy(false);
   }
@@ -42,11 +42,5 @@ class CategoryViewModel extends BaseViewModel {
             ),
             iconMargin: EdgeInsets.only(top: 4.0)))
         .toList() as List<Tab>;
-  }
-
-  Future<void> deleteWishes(Wish wish) async {
-    _navigator.pop();
-    await _api.updateWish(wish.id, true);
-    await initialize();
   }
 }
