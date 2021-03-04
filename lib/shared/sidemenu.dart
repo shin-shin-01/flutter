@@ -137,7 +137,7 @@ Widget _addFriendTile(context) {
   return ListTile(
     title: Text('フレンド'),
     leading: Padding(
-      child: Image.asset("images/tabmenu/friend.png"),
+      child: Image.asset("images/colored_tabmenu/friend.png"),
       padding: EdgeInsets.all(8.0),
     ),
     onTap: () => friendDialog(context),
