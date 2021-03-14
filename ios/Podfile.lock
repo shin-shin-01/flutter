@@ -1,42 +1,113 @@
 PODS:
+  - Firebase/CoreOnly (7.3.0):
+    - FirebaseCore (= 7.3.0)
+  - Firebase/Storage (7.3.0):
+    - Firebase/CoreOnly
+    - FirebaseStorage (~> 7.3.0)
+  - firebase_core (0.7.0):
+    - Firebase/CoreOnly (= 7.3.0)
+    - Flutter
+  - firebase_storage (7.0.0):
+    - Firebase/Storage (= 7.3.0)
+    - firebase_core
+    - Flutter
+  - FirebaseCore (7.3.0):
+    - FirebaseCoreDiagnostics (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/Logger (~> 7.0)
+  - FirebaseCoreDiagnostics (7.8.0):
+    - GoogleDataTransport (~> 8.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/Logger (~> 7.0)
+    - nanopb (~> 2.30907.0)
+  - FirebaseStorage (7.3.0):
+    - FirebaseCore (~> 7.0)
+    - GTMSessionFetcher/Core (~> 1.4)
   - Flutter (1.0.0)
   - flutter_keyboard_visibility (0.0.1):
     - Flutter
   - flutter_line_sdk (1.3.0):
     - Flutter
     - LineSDKSwift (~> 5.3)
+  - GoogleDataTransport (8.3.0):
+    - GoogleUtilities/Environment (~> 7.2)
+    - nanopb (~> 2.30907.0)
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Environment (7.3.0):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (7.3.0):
+    - GoogleUtilities/Environment
+  - GTMSessionFetcher/Core (1.5.0)
+  - image_picker (0.0.1):
+    - Flutter
   - LineSDKSwift (5.7.0):
     - LineSDKSwift/Core (= 5.7.0)
   - LineSDKSwift/Core (5.7.0)
+  - nanopb (2.30907.0):
+    - nanopb/decode (= 2.30907.0)
+    - nanopb/encode (= 2.30907.0)
+  - nanopb/decode (2.30907.0)
+  - nanopb/encode (2.30907.0)
   - path_provider (0.0.1):
     - Flutter
+  - PromisesObjC (1.2.12)
 
 DEPENDENCIES:
+  - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
+  - firebase_storage (from `.symlinks/plugins/firebase_storage/ios`)
   - Flutter (from `Flutter`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_line_sdk (from `.symlinks/plugins/flutter_line_sdk/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
 
 SPEC REPOS:
   trunk:
+    - Firebase
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseStorage
+    - GoogleDataTransport
+    - GoogleUtilities
+    - GTMSessionFetcher
     - LineSDKSwift
+    - nanopb
+    - PromisesObjC
 
 EXTERNAL SOURCES:
+  firebase_core:
+    :path: ".symlinks/plugins/firebase_core/ios"
+  firebase_storage:
+    :path: ".symlinks/plugins/firebase_storage/ios"
   Flutter:
     :path: Flutter
   flutter_keyboard_visibility:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_line_sdk:
     :path: ".symlinks/plugins/flutter_line_sdk/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
 
 SPEC CHECKSUMS:
+  Firebase: 26223c695fe322633274198cb19dca8cb7e54416
+  firebase_core: 91b27774a52f41f8b58484a75edf71197ac01c59
+  firebase_storage: 554b8ce9192bfe0bd35f63da42d0d1f6ae819ccc
+  FirebaseCore: 4d3c72622ce0e2106aaa07bb4b2935ba2c370972
+  FirebaseCoreDiagnostics: 066f996579cf097bdad3d7dc9a918d6b9e129c50
+  FirebaseStorage: 5002b1895bfe74a5ce92ad54f966e6162d0da2e5
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_line_sdk: 5ca4b2a634c15b909d7e4b53f57bb81a21295b63
+  GoogleDataTransport: b006084b73915a42c28a3466961a4edda3065da6
+  GoogleUtilities: abda45f519bc4073aa1171d2f8742108def46017
+  GTMSessionFetcher: b3503b20a988c4e20cc189aa798fd18220133f52
+  image_picker: 9c3312491f862b28d21ecd8fdf0ee14e601b3f09
   LineSDKSwift: f9c232f89185b887b5725aa278325f3a23e33bbc
+  nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
 
 PODFILE CHECKSUM: 874d8711cdfcd42bb6523cb3102cddaa26d76bc9
 
