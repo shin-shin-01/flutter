@@ -19,12 +19,18 @@ class CategoryViewModel extends BaseViewModel {
   List<Tab> category_tabs = [];
 
   Future<void> initialize() async {
-    setBusy(true);
+    // 初回のみ実行
+    if (category_tabs.length == 0) {
+      setBusy(true);
 
-    categories = await _data.getCategories;
-    wishes = _data.getWishes;
-    await setTabs();
-    setBusy(false);
+      categories = await _data.getCategories;
+
+      await _api.getWishes();
+      wishes = _data.getWishes;
+
+      await setTabs();
+      setBusy(false);
+    }
   }
 
   Future<void> reload() async {
