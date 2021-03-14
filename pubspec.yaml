@@ -47,6 +47,7 @@ dependencies:
   # for app icon
   flutter_launcher_icons: ^0.7.4
   # for firebase
+  firebase_core: ^0.7.0
   firebase_storage: ^7.0.0
 
 
