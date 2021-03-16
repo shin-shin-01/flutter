@@ -6,6 +6,7 @@ import 'package:my_app/services/startup.dart';
 import 'package:my_app/services/navigation.dart';
 import 'package:my_app/services/configuration.dart';
 import 'package:my_app/services/data.dart';
+import 'package:my_app/services/firebase_api.dart';
 
 /// servicesLocator
 GetIt servicesLocator = GetIt.instance;
@@ -21,6 +22,7 @@ void setupServiceLocator() {
   // It's generally used to save resources and memory
   servicesLocator.registerLazySingleton(() => AuthService());
   servicesLocator.registerLazySingleton(() => APIService());
+  servicesLocator.registerLazySingleton(() => FirebaseAPIService());
   servicesLocator.registerLazySingleton(() => NavigationService());
   servicesLocator.registerLazySingleton(() => StartupService());
 }
