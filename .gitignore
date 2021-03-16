@@ -42,3 +42,6 @@ app.*.map.json
 
 # 環境変数読み込み
 .env
+# firebase 環境変数
+ios/Runner/GoogleService-Info.plist
+
