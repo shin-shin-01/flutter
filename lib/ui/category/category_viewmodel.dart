@@ -1,10 +1,12 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
+import 'package:image_picker/image_picker.dart';
 import 'package:my_app/model/category.dart';
 import 'package:my_app/model/wish.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/api.dart';
+import 'package:my_app/services/firebase_api.dart';
 import 'package:my_app/services/navigation.dart';
 import 'package:my_app/services/data.dart';
 
@@ -12,6 +14,8 @@ class CategoryViewModel extends BaseViewModel {
   final _api = servicesLocator<APIService>();
   final _navigator = servicesLocator<NavigationService>();
   final _data = servicesLocator<DataService>();
+  final _firebase_api = servicesLocator<FirebaseAPIService>();
+  final picker = ImagePicker();
 
   /// categories
   List<Category> categories;
@@ -58,5 +62,34 @@ class CategoryViewModel extends BaseViewModel {
     _navigator.pop();
     await _api.updateWish(wish.id, true);
     await initialize();
+  }
+
+  //  画像処理
+  Future uploadImageToFirebase(file, Wish wish) async {
+    return await _firebase_api.uploadImage(wish.id, File(file.path));
+  }
+
+  Future getImageFromGalleryOrCamera(source) async {
+    // 画像が重すぎるため圧縮
+    return await picker.getImage(source: source, imageQuality: 30);
+  }
+
+  Future imageFunction(String type, Wish wish) async {
+    setBusy(true);
+
+    var file;
+    if (type == "gallery") {
+      file = await getImageFromGalleryOrCamera(ImageSource.gallery);
+    } else {
+      file = await getImageFromGalleryOrCamera(ImageSource.camera);
+    }
+    final imageUrl = await uploadImageToFirebase(file, wish);
+    if (imageUrl != null) {
+      await _api.createImage(wish.id, imageUrl);
+      wish.imageUrl = imageUrl;
+    } else {
+      _navigator.pushNamedAndRemoveUntil(routeName: '/error');
+    }
+    _navigator.pushNamedAndRemoveUntil(routeName: '/root');
   }
 }

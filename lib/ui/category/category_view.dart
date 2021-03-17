@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'package:my_app/model/wish.dart';
 import 'package:my_app/ui/category/category_viewmodel.dart';
 import 'package:my_app/shared/loading.dart';
@@ -99,7 +99,7 @@ class CategoryView extends StatelessWidget {
         /// タップ時の動作
         onTap: () {
           {
-            showWishDetailDialog(context, wish);
+            showWishDetailDialog(context, model, wish);
           }
           ;
         },
@@ -108,6 +108,7 @@ class CategoryView extends StatelessWidget {
   }
 }
 
+// Wish 削除 ダイアログ
 Future showDeleteDialog(context, CategoryViewModel model, Wish wish) {
   final _navigator = servicesLocator<NavigationService>();
   return showDialog(
@@ -133,7 +134,8 @@ Future showDeleteDialog(context, CategoryViewModel model, Wish wish) {
   );
 }
 
-Future showWishDetailDialog(context, Wish wish) {
+// Wish の詳細画面
+Future showWishDetailDialog(context, CategoryViewModel model, Wish wish) {
   final _navigator = servicesLocator<NavigationService>();
   final _config = servicesLocator<ConfigurationService>();
 
@@ -145,11 +147,17 @@ Future showWishDetailDialog(context, Wish wish) {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           AlertDialog(
-            title: Text(wish.name),
+            title: ListTile(
+              title: Text(wish.name),
+              trailing: IconButton(
+                  icon: Icon(Icons.add_photo_alternate_outlined),
+                  onPressed: () => showImagePickerDialog(context, model, wish)),
+            ),
             backgroundColor: _config.appColor["dialogBackground"],
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
+                  _detailImage(wish.imageUrl),
                   _detailTile(wish.userName, Icon(Icons.person)),
                   _detailTile(wish.categoryName, Icon(Icons.search)),
                   _detailTile(wish.star.toString(), Icon(Icons.favorite)),
@@ -171,6 +179,7 @@ Future showWishDetailDialog(context, Wish wish) {
   );
 }
 
+// Wishの詳細 各項目
 Widget _detailTile(
   text,
   icon,
@@ -187,4 +196,35 @@ Widget _detailTile(
             text,
             style: TextStyle(color: _config.appColor["text"], fontSize: 15.0),
           )));
+}
+
+// Wish の画像
+Widget _detailImage(url) {
+  return Center(
+    child: Image(
+      image: NetworkImage(url),
+      height: 150,
+    ),
+  );
+}
+
+// Wish の画像追加 ダイアログ
+Future showImagePickerDialog(context, CategoryViewModel model, Wish wish) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      return CupertinoAlertDialog(
+        title: Text("画像を追加してみよう"),
+        actions: <Widget>[
+          CupertinoDialogAction(
+            child: Text("画像選択"),
+            onPressed: () => model.imageFunction("gallery", wish),
+          ),
+          CupertinoDialogAction(
+              child: Text("カメラ"),
+              onPressed: () => model.imageFunction("camera", wish)),
+        ],
+      );
+    },
+  );
 }

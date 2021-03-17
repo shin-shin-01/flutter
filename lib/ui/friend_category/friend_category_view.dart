@@ -123,6 +123,7 @@ Future showWishDetailDialog(context, FriendWish wish) {
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
+                  _detailImage(wish.imageUrl),
                   _detailTile(wish.userName, Icon(Icons.person)),
                   _detailTile(wish.categoryName, Icon(Icons.search)),
                   _detailTile(wish.star.toString(), Icon(Icons.favorite)),
@@ -160,4 +161,12 @@ Widget _detailTile(
             text,
             style: TextStyle(color: _config.appColor["text"], fontSize: 15.0),
           )));
+}
+
+Widget _detailImage(url) {
+  return Center(
+    child: Image(
+      image: NetworkImage(url),
+    ),
+  );
 }
