@@ -7,6 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:my_app/services_locator.dart';
 import 'package:my_app/services/navigation.dart';
 import 'package:my_app/shared/success_screen.dart';
+import 'package:my_app/shared/error_screen.dart';
 import 'package:my_app/ui/sign_in/sign_in_view.dart';
 import 'package:my_app/ui/splash/splash_view.dart';
 import 'package:my_app/ui/root/root_view.dart';
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => SplashView(),
         '/sign_in': (context) => SignInView(),
         '/root': (context) => RootView(),
-        '/success': (context) => SuccessScreen()
+        '/success': (context) => SuccessScreen(),
+        '/error': (context) => ErrorScreen()
         // '/settings': (context) => SettingsPage(),
       },
     );

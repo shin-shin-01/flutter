@@ -17,6 +17,9 @@ class FriendWish {
   /// 欲しい度
   final int star;
 
+  // 欲しいものの画像
+  final String imageUrl;
+
   /// Constructor
   FriendWish(
       {this.id,
@@ -24,7 +27,8 @@ class FriendWish {
       this.userPictureUrl,
       this.categoryName,
       this.name,
-      this.star});
+      this.star,
+      this.imageUrl});
 
   factory FriendWish.fromJson(Map<String, dynamic> json) {
     return FriendWish(
@@ -33,6 +37,7 @@ class FriendWish {
         userPictureUrl: json['user_picture_url'] as String,
         categoryName: json['category_name'] as String,
         name: json['name'] as String,
-        star: json['star'] as int);
+        star: json['star'] as int,
+        imageUrl: json['image_url'] as String);
   }
 }
