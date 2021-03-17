@@ -261,4 +261,21 @@ class APIService {
     Map<String, List<FriendWish>> wishes = parseFriendWishes(response.body);
     await _data.saveFriendWishes(wishes);
   }
+
+  /// create Wish Image
+  Future<void> createImage(int wish_id, String image_url) async {
+    final user = await _data.getMe;
+    final uid = user.uid;
+
+    final endpoint = '/users/$uid/images';
+    final url = requestUrl(endpoint);
+    final headers = await authorizedHeaderWithJson();
+
+    final payload = jsonEncode({
+      'wish': {'id': wish_id},
+      'image': {'url': image_url}
+    });
+
+    final response = await http.post(url, headers: headers, body: payload);
+  }
 }
