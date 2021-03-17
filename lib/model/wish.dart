@@ -14,8 +14,17 @@ class Wish {
   /// 欲しい度
   final int star;
 
+  // 欲しいものの画像
+  String imageUrl;
+
   /// Constructor
-  Wish({this.id, this.userName, this.categoryName, this.name, this.star});
+  Wish(
+      {this.id,
+      this.userName,
+      this.categoryName,
+      this.name,
+      this.star,
+      this.imageUrl});
 
   factory Wish.fromJson(Map<String, dynamic> json) {
     return Wish(
@@ -23,6 +32,7 @@ class Wish {
         userName: json['user_name'] as String,
         categoryName: json['category_name'] as String,
         name: json['name'] as String,
-        star: json['star'] as int);
+        star: json['star'] as int,
+        imageUrl: json['image_url'] as String);
   }
 }
